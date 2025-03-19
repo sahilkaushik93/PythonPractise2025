@@ -1,0 +1,9 @@
+pandas
+numpy
+torch
+# tensorflow
+keras
+scikit-learn
+matplotlib
+ipykernel
+nbconvert
