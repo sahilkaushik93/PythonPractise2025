@@ -10095,7 +10095,472 @@ False
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
-<h4 id="8.-Iterators,-Generators-&amp;-Decorators">8. Iterators, Generators &amp; Decorators<a class="anchor-link" href="#8.-Iterators,-Generators-&amp;-Decorators">¶</a></h4>
+<h4 id="8.-Iterators,-Generators,-Coroutines,-Closures-&amp;-Decorators">8. Iterators, Generators, Coroutines, Closures &amp; Decorators<a class="anchor-link" href="#8.-Iterators,-Generators,-Coroutines,-Closures-&amp;-Decorators">¶</a></h4>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">## Iterators</span>
+<span class="c1"># what is an iterator?</span>
+<span class="c1"># An iterator is an object that allows you to traverse a container (like a list) and access its elements.</span>
+<span class="c1"># what is the iter() function?</span>
+<span class="c1"># The iter() function returns an iterator object for the given object.</span>
+<span class="c1"># what is the next() function?</span>
+<span class="c1"># The next() function returns the next item from the iterator.</span>
+<span class="c1"># what is the StopIteration exception?</span>
+<span class="c1"># The StopIteration exception is raised when there are no more items to return from the iterator.</span>
+<span class="c1"># what is the __iter__() method?</span>
+<span class="c1"># The __iter__() method returns an iterator object for the given object.</span>
+<span class="c1"># what is the __next__() method?</span>
+<span class="c1"># The __next__() method returns the next item from the iterator.</span>
+
+<span class="c1"># ✅ Creating an Iterator</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MyIterator</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">start</span><span class="p">,</span> <span class="n">end</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">current</span> <span class="o">=</span> <span class="n">start</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">end</span> <span class="o">=</span> <span class="n">end</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span>  <span class="c1"># The iterator object itself</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span> <span class="o">&lt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">end</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">current</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">current</span> <span class="o">-</span> <span class="mi">1</span>
+        <span class="c1"># else:</span>
+        <span class="c1">#     raise StopIteration  # This should be avoided in Python 3.7+</span>
+
+<span class="c1"># ✅ Creating an iterator object</span>
+<span class="n">iter_obj</span> <span class="o">=</span> <span class="n">MyIterator</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">6</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iter_obj</span><span class="p">))</span>  <span class="c1"># Output: 3</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iter_obj</span><span class="p">))</span>  <span class="c1"># Output: 4</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iter_obj</span><span class="p">))</span>  <span class="c1"># Output: 5</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">iter_obj</span><span class="p">))</span>  <span class="c1"># Raises StopIteration (Expected Behavior)</span>
+
+
+<span class="c1"># what is an iterable?</span>
+<span class="c1"># An iterable is an object that can be iterated over.</span>
+
+<span class="c1"># difference between iterator and iterable?</span>
+<span class="c1"># An iterable is an object that can be iterated over, while an iterator is an object that allows you to traverse an iterable.</span>
+
+<span class="c1">## Generators</span>
+<span class="c1"># what is a generator?</span>
+<span class="c1"># A generator is a function that returns an iterator object.</span>
+<span class="c1"># what is the yield keyword?</span>
+<span class="c1"># The yield keyword is used in a generator function to return a value without terminating the function.</span>
+<span class="c1"># what is the next() function?</span>
+<span class="c1"># The next() function returns the next item from the generator.</span>
+<span class="c1"># example of a generator function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_generator</span><span class="p">():</span>
+    <span class="k">yield</span> <span class="mi">1</span>
+    <span class="k">yield</span> <span class="mi">2</span>
+    <span class="k">yield</span> <span class="mi">3</span>
+
+<span class="n">gen</span> <span class="o">=</span> <span class="n">my_generator</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen</span><span class="p">))</span>  <span class="c1"># Output: 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen</span><span class="p">))</span>  <span class="c1"># Output: 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen</span><span class="p">))</span>  <span class="c1"># Output: 3</span>
+<span class="c1"># print(next(gen))  # Raises StopIteration</span>
+
+<span class="c1"># what is a generator expression?</span>
+<span class="c1"># A generator expression is a concise way to create a generator.</span>
+<span class="c1"># example of a generator expression</span>
+<span class="n">gen</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen</span><span class="p">))</span>  <span class="c1"># Output: 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen</span><span class="p">))</span>  <span class="c1"># Output: 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">gen</span><span class="p">))</span>  <span class="c1"># Output: 3</span>
+<span class="c1"># print(next(gen))  # Raises StopIteration</span>
+
+<span class="c1"># what is the send() method?</span>
+<span class="c1"># The send() method is used to send a value to the generator.</span>
+<span class="c1"># what is the close() method?</span>
+<span class="c1"># The close() method is used to close the generator.</span>
+<span class="c1"># what is the throw() method?</span>
+<span class="c1"># The throw() method is used to raise an exception in the generator.</span>
+
+<span class="c1"># difference between a generator and a list?</span>
+<span class="c1"># A generator produces items one at a time, while a list produces all items at once.</span>
+<span class="c1"># difference between a generator and a function?</span>
+<span class="c1"># A generator is a function that returns an iterator object, while a function returns a value.</span>
+<span class="c1"># difference between a generator and an iterator?</span>
+<span class="c1"># A generator is a function that returns an iterator object, while an iterator is an object that allows you to traverse a container.</span>
+
+<span class="c1">## Coroutines</span>
+<span class="c1"># what is a coroutine?</span>
+<span class="c1"># A coroutine is a function that can pause and resume its execution.</span>
+<span class="c1"># what is the yield keyword?</span>
+<span class="c1"># The yield keyword is used in a coroutine to pause its execution and return a value.</span>
+<span class="c1"># types of coroutines in Python?</span>
+<span class="c1"># There are two types of coroutines in Python: generator-based coroutines and async-based coroutines.</span>
+<span class="c1"># what is the async keyword?</span>
+<span class="c1"># The async keyword is used to define an async-based coroutine.</span>
+<span class="c1"># what is the await keyword?</span>
+<span class="c1"># The await keyword is used to pause the execution of an async-based coroutine until a future object is resolved.</span>
+<span class="c1"># what is the asyncio module?</span>
+<span class="c1"># The asyncio module provides support for writing asynchronous code using async-based coroutines.</span>
+<span class="c1"># what is the async/await syntax?</span>
+<span class="c1"># The async/await syntax is used to define and call async-based coroutines.</span>
+<span class="c1"># example of a generator-based coroutine</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_coroutine</span><span class="p">():</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="k">yield</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Received: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">coro</span> <span class="o">=</span> <span class="n">my_coroutine</span><span class="p">()</span>
+
+<span class="nb">next</span><span class="p">(</span><span class="n">coro</span><span class="p">)</span>  <span class="c1"># Start the coroutine</span>
+<span class="n">coro</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>  <span class="c1"># Output: Received: 10</span>
+<span class="n">coro</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>  <span class="c1"># Output: Received: 20</span>
+
+<span class="c1"># example of an async-based coroutine</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">asyncio</span>
+
+<span class="k">async</span> <span class="k">def</span><span class="w"> </span><span class="nf">my_coroutine</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Coroutine Started"</span><span class="p">)</span>
+    <span class="k">await</span> <span class="n">asyncio</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># Simulate async operation</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Coroutine Ended"</span><span class="p">)</span>
+
+<span class="k">await</span> <span class="n">my_coroutine</span><span class="p">()</span>  <span class="c1"># ✅ Works in Jupyter Notebook</span>
+
+
+<span class="c1"># what is the aiohttp module?</span>
+<span class="c1"># The aiohttp module is an asynchronous HTTP client/server framework based on asyncio.</span>
+<span class="c1"># what is the asyncpg module?</span>
+<span class="c1"># The asyncpg module is an asynchronous PostgreSQL client library based on asyncio.</span>
+<span class="c1"># what is the asyncssh module?</span>
+<span class="c1"># The asyncssh module is an asynchronous SSH client/server library based on asyncio.</span>
+<span class="c1"># what is the asyncore module?</span>
+<span class="c1"># The asyncore module provides support for asynchronous I/O handling.</span>
+<span class="c1"># what is the asynchat module?</span>
+<span class="c1"># The asynchat module provides support for asynchronous chat clients/servers.</span>
+<span class="c1"># what is the selectors module?</span>
+<span class="c1"># The selectors module provides high-level I/O multiplexing based on the select module.</span>
+<span class="c1"># what is the trio module?</span>
+<span class="c1"># The trio module is a friendly Python library for async concurrency and I/O.</span>
+<span class="c1"># what is the curio module?</span>
+<span class="c1"># The curio module is a library for concurrent I/O and async programming.</span>
+<span class="c1"># what is the trio-asyncio module?</span>
+<span class="c1"># The trio-asyncio module provides compatibility</span>
+<span class="c1"># what is the async-timeout module?</span>
+<span class="c1"># The async-timeout module provides support for asynchronous timeouts.</span>
+<span class="c1"># what is the asyncpgsa module?</span>
+<span class="c1"># The asyncpgsa module is an asynchronous PostgreSQL client library for SQLAlchemy.</span>
+
+<span class="c1">## Itertools</span>
+<span class="c1"># what is the itertools module?</span>
+<span class="c1"># The itertools module provides a collection of tools for working with iterators.</span>
+<span class="c1"># what is the count() function?</span>
+<span class="c1"># The count() function returns an infinite iterator that generates numbers starting from a given value.</span>
+<span class="c1"># what is the cycle() function?</span>
+<span class="c1"># The cycle() function returns an infinite iterator that cycles through a sequence of values.</span>
+<span class="c1"># what is the repeat() function?</span>
+<span class="c1"># The repeat() function returns an iterator that repeats a value a specified number of times.</span>
+<span class="c1"># what is the accumulate() function?</span>
+<span class="c1"># The accumulate() function returns an iterator that generates accumulated sums.</span>
+<span class="c1"># what is the chain() function?</span>
+<span class="c1"># The chain() function returns an iterator that chains together multiple iterables.</span>
+<span class="c1"># what is the compress() function?</span>
+<span class="c1"># The compress() function returns an iterator that filters elements from an iterable based on a selector.</span>
+<span class="c1"># what is the dropwhile() function?</span>
+<span class="c1"># The dropwhile() function returns an iterator that drops elements from an iterable until a condition is false.</span>
+<span class="c1"># what is the filterfalse() function?</span>
+<span class="c1"># The filterfalse() function returns an iterator that filters elements from an iterable based on a condition.</span>
+<span class="c1"># what is the groupby() function?</span>
+<span class="c1"># The groupby() function returns an iterator that groups elements from an iterable based on a key function.</span>
+<span class="c1"># what is the islice() function?</span>
+<span class="c1"># The islice() function returns an iterator that slices elements from an iterable.</span>
+<span class="c1"># what is the starmap() function?</span>
+<span class="c1"># The starmap() function returns an iterator that applies a function to elements from an iterable.</span>
+<span class="c1"># what is the takewhile() function?</span>
+<span class="c1"># The takewhile() function returns an iterator that takes elements from an iterable until a condition is false.</span>
+<span class="c1"># what is the tee() function?</span>
+<span class="c1"># The tee() function returns multiple independent iterators from a single iterable.</span>
+<span class="c1"># what is the zip_longest() function?</span>
+<span class="c1"># The zip_longest() function returns an iterator that aggregates elements from multiple iterables.</span>
+<span class="c1"># what is the product() function?</span>
+<span class="c1"># The product() function returns an iterator that generates the Cartesian product of multiple iterables.</span>
+<span class="c1"># what is the permutations() function?</span>
+<span class="c1"># The permutations() function returns an iterator that generates all possible permutations of an iterable.</span>
+<span class="c1"># what is the combinations() function?</span>
+<span class="c1"># The combinations() function returns an iterator that generates all possible combinations of an iterable.</span>
+<span class="c1"># what is the combinations_with_replacement() function?</span>
+<span class="c1"># The combinations_with_replacement() function returns an iterator that generates all possible combinations of an iterable with replacement.</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">itertools</span>
+
+<span class="c1"># ✅ count() Function</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">count</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">break</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">" "</span><span class="p">)</span>  <span class="c1"># Output: 1 3 5 7 9</span>
+
+<span class="c1"># ✅ cycle() Function</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="n">itertools</span><span class="o">.</span><span class="n">cycle</span><span class="p">(</span><span class="s2">"ABC"</span><span class="p">)):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">" "</span><span class="p">)</span>  <span class="c1"># Output: 0 A 1 B 2 C 3 A 4 B</span>
+
+<span class="c1"># ✅ repeat() Function</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">repeat</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">3</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">" "</span><span class="p">)</span>  <span class="c1"># Output: 10 10 10</span>
+
+<span class="c1"># ✅ accumulate() Function</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">accumulate</span><span class="p">(</span><span class="n">data</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: [1, 3, 6, 10, 15]</span>
+
+<span class="c1"># ✅ chain() Function</span>
+<span class="n">data1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">data2</span> <span class="o">=</span> <span class="p">[</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="p">(</span><span class="n">data1</span><span class="p">,</span> <span class="n">data2</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: [1, 2, 3, 4, 5, 6]</span>
+
+<span class="c1"># ✅ compress() Function</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">selectors</span> <span class="o">=</span> <span class="p">[</span><span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">,</span> <span class="kc">False</span><span class="p">,</span> <span class="kc">True</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">compress</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">selectors</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: [1, 3, 5]</span>
+
+<span class="c1"># ✅ dropwhile() Function</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">dropwhile</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: [3, 4, 5]</span>
+
+<span class="c1"># ✅ filterfalse() Function</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">filterfalse</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: [3, 4, 5]</span>
+
+<span class="c1"># ✅ groupby() Function</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="s2">"A"</span><span class="p">,</span> <span class="mi">1</span><span class="p">),</span> <span class="p">(</span><span class="s2">"A"</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="s2">"B"</span><span class="p">,</span> <span class="mi">3</span><span class="p">),</span> <span class="p">(</span><span class="s2">"B"</span><span class="p">,</span> <span class="mi">4</span><span class="p">)]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="p">{</span><span class="n">key</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">group</span><span class="p">)</span> <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">group</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])}</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: {'A': [('A', 1), ('A', 2)], 'B': [('B', 3), ('B', 4)]}</span>
+
+<span class="c1"># ✅ islice() Function</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">islice</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="kc">None</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: [3, 4, 5]</span>
+
+<span class="c1"># ✅ starmap() Function</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">),</span> <span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">)]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">starmap</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: [3, 7, 11]</span>
+
+<span class="c1"># ✅ takewhile() Function</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">takewhile</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">&lt;</span> <span class="mi">3</span><span class="p">,</span> <span class="n">data</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: [1, 2]</span>
+
+<span class="c1"># ✅ tee() Function</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">iter1</span><span class="p">,</span> <span class="n">iter2</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">tee</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">iter1</span><span class="p">))</span>  <span class="c1"># Output: [1, 2, 3, 4, 5]</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">iter2</span><span class="p">))</span>  <span class="c1"># Output: [1, 2, 3, 4, 5]</span>
+
+<span class="c1"># ✅ zip_longest() Function</span>
+<span class="n">data1</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">data2</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">zip_longest</span><span class="p">(</span><span class="n">data1</span><span class="p">,</span> <span class="n">data2</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: [(1, 'A'), (2, 'B'), (3, None)]</span>
+
+<span class="c1"># ✅ product() Function</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">repeat</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: [(1, 1), (1, 2), (2, 1), (2, 2)]</span>
+
+<span class="c1"># ✅ permutations() Function</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">permutations</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: [(1, 2), (1, 3), (2, 1), (2, 3), (3, 1), (3, 2)]</span>
+
+<span class="c1"># ✅ combinations() Function</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">combinations</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: [(1, 2), (1, 3), (2, 3)]</span>
+
+<span class="c1"># ✅ combinations_with_replacement() Function</span>
+<span class="n">data</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
+<span class="n">result</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">combinations_with_replacement</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="mi">2</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: [(1, 1), (1, 2), (1, 3), (2, 2), (2, 3), (3, 3)]</span>
+
+<span class="c1"># Note:</span>
+<span class="c1"># 1️⃣ count(), cycle(), repeat() → Infinite Iterators</span>
+<span class="c1"># 2️⃣ accumulate(), chain(), compress() → Iterators</span>
+<span class="c1"># 3️⃣ dropwhile(), filterfalse(), groupby() → Filtering Iterators</span>
+<span class="c1"># 4️⃣ islice(), starmap(), takewhile() → Slicing &amp; Mapping Iterators</span>
+<span class="c1"># 5️⃣ tee(), zip_longest() → Multiple Iterators</span>
+<span class="c1"># 6️⃣ product(), permutations(), combinations() → Combinatorial Iterators</span>
+
+<span class="c1">## Closure</span>
+<span class="c1"># what is a closure?</span>
+<span class="c1"># A closure is a function that remembers the variables from its enclosing scope even </span>
+<span class="c1"># after the outer function has finished executing. This allows functions to retain </span>
+<span class="c1"># state across multiple calls without using global variables.</span>
+<span class="c1"># Closures are typically used when a function is returned from another function and </span>
+<span class="c1"># retains access to the variables of the outer function.</span>
+
+<span class="c1"># types of closures in Python?</span>
+<span class="c1"># There are two types of closures in Python: function closures and class closures.</span>
+<span class="c1"># what is a function closure?</span>
+<span class="c1"># A function closure is a function that captures the environment in which it was defined.</span>
+<span class="c1"># what is a class closure?</span>
+<span class="c1"># A class closure is a class that captures the environment in which it was defined.</span>
+
+<span class="c1"># example of a function closure</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">outer_function</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inner_function</span><span class="p">(</span><span class="n">y</span><span class="p">):</span> <span class="c1"># Closure</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+    <span class="k">return</span> <span class="n">inner_function</span> 
+
+<span class="n">closure</span> <span class="o">=</span> <span class="n">outer_function</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span> 
+
+<span class="nb">print</span><span class="p">(</span><span class="n">closure</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>  <span class="c1"># Output: 15</span>
+
+<span class="c1"># example of a class closure</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">outer_class</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">class</span><span class="w"> </span><span class="nc">InnerClass</span><span class="p">:</span> 
+        <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span>
+    <span class="k">return</span> <span class="n">InnerClass</span>
+
+<span class="n">closure</span> <span class="o">=</span> <span class="n">outer_class</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">closure</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>  <span class="c1"># Output: 15</span>
+
+<span class="c1">## Global Variables vs Closures</span>
+<span class="c1"># 🔴 Problem: Global variables can be modified accidentally, leading to unexpected behavior in large programs.</span>
+<span class="c1"># ✔️ No global variable needed! Each instance maintains its own state.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">make_counter</span><span class="p">():</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># Encapsulated variable</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">increment</span><span class="p">():</span>
+        <span class="k">nonlocal</span> <span class="n">count</span> <span class="c1"># instead of global count, we use nonlocal count - for encapsulation &amp; calling via closure</span>
+        <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">count</span>
+    <span class="k">return</span> <span class="n">increment</span>  <span class="c1"># Returning function</span>
+
+<span class="n">counter</span> <span class="o">=</span> <span class="n">make_counter</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counter</span><span class="p">())</span>  <span class="c1"># 1</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counter</span><span class="p">())</span>  <span class="c1"># 2</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">counter</span><span class="p">())</span>  <span class="c1"># 3</span>
+
+<span class="c1"># Real World Example:</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">logger</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Calling </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> with </span><span class="si">{</span><span class="n">args</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">kwargs</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span>  <span class="c1"># Returning the inner function (closure)</span>
+
+<span class="nd">@logger</span>  <span class="c1"># Applying the closure-based decorator</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>  <span class="c1"># Output: Calling add with (3, 5), {} → 8</span>
+
+<span class="c1"># relationship between a closure and a decorator?</span>
+<span class="c1"># A closure is a function that captures the environment in which it was defined, while a decorator is a function that modifies another function or method.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>3
+4
+5
+None
+1
+2
+3
+1
+2
+3
+Received: 10
+Received: 20
+Coroutine Started
+Coroutine Ended
+1 3 5 7 9 0 A 1 B 2 C 3 A 4 B 10 10 10 [1, 3, 6, 10, 15]
+[1, 2, 3, 4, 5, 6]
+[1, 3, 5]
+[3, 4, 5]
+[3, 4, 5]
+{'A': [('A', 1), ('A', 2)], 'B': [('B', 3), ('B', 4)]}
+[3, 4, 5]
+[3, 7, 11]
+[1, 2]
+[1, 2, 3, 4, 5]
+[1, 2, 3, 4, 5]
+[(1, 'A'), (2, 'B'), (3, None)]
+[(1, 1), (1, 2), (2, 1), (2, 2)]
+[(1, 2), (1, 3), (2, 1), (2, 3), (3, 1), (3, 2)]
+[(1, 2), (1, 3), (2, 3)]
+[(1, 1), (1, 2), (1, 3), (2, 2), (2, 3), (3, 3)]
+15
+15
+1
+2
+3
+Calling add with (3, 5), {}
+8
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">## Decorators</span>
+
+<span class="c1">## Abstraction &amp; Decorator Relationship</span>
+
+<span class="c1">## Chaining of decorators</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
 </div>
 </div>
 </div>
