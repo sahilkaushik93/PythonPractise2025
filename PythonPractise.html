@@ -7522,6 +7522,27 @@ a.anchor-link {
 <li>Data Types</li>
 <li>Operators</li>
 <li>Control Flow (loops &amp; conditionals)</li>
+<li>Functions &amp; Scope</li>
+<li>File Handling</li>
+<li>OOPs</li>
+<li>Iterators, Generators, Coroutines, Decorators &amp; Closures</li>
+<li>Exceptional Handling &amp; Logging</li>
+<li>Modules, Libraries &amp; Packages</li>
+<li>Multi-threading &amp; Multiprocessing</li>
+<li>Memory Management &amp; Optimization</li>
+<li>Python Debugging, Testing &amp; Best Practices</li>
+<li>Regular Expressions</li>
+<li>Database Handling (Sqlite3 &amp; SQLAlchemy)</li>
+<li>Web Scraping, Automation &amp; API Handling</li>
+<li>Meta-Programming (Metaclasses &amp; Reflection)</li>
+<li>Design Patterns in Python</li>
+<li>Network Programming</li>
+<li>Security</li>
+<li>AI-ML (Pandas)</li>
+<li>AI-ML (Numpy)</li>
+<li>AI-ML (PyTorch)</li>
+<li>AI-ML (Tensorflow)</li>
+<li>AI-ML (Data Visualization)</li>
 </ol>
 </div>
 </div>
@@ -8720,6 +8741,1375 @@ a.anchor-link {
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="5.-Functions-&amp;-Scope">5. Functions &amp; Scope<a class="anchor-link" href="#5.-Functions-&amp;-Scope">¶</a></h4>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">## Functions</span>
+<span class="c1"># function definition</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">)</span>
+
+<span class="c1"># function call</span>
+<span class="n">greet</span><span class="p">()</span>
+
+<span class="c1"># function with arguments</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">greet</span><span class="p">(</span><span class="s2">"Alice"</span><span class="p">)</span>
+
+<span class="c1"># function with default arguments</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"Alice"</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">greet</span><span class="p">()</span>
+
+<span class="c1"># function with return value</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># function with multiple return values</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_sub</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span><span class="p">,</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+
+<span class="n">add</span><span class="p">,</span> <span class="n">sub</span> <span class="o">=</span> <span class="n">add_sub</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># function with variable arguments</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">):</span>
+    <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">args</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># function with keyword arguments</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">message</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">greet</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"Alice"</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">"Hello"</span><span class="p">)</span>
+
+<span class="c1"># function with variable keyword arguments</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">'message'</span><span class="p">]</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">kwargs</span><span class="p">[</span><span class="s1">'name'</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">greet</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">"Alice"</span><span class="p">,</span> <span class="n">message</span><span class="o">=</span><span class="s2">"Hello"</span><span class="p">)</span>
+
+<span class="c1"># lambda function</span>
+<span class="n">add</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># map function</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">squared</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">numbers</span><span class="p">))</span>
+
+<span class="c1"># filter function</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">even</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span><span class="p">,</span> <span class="n">numbers</span><span class="p">))</span>
+
+<span class="c1"># reduce function</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">reduce</span>
+<span class="n">numbers</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">]</span>
+<span class="n">sum_reduce</span> <span class="o">=</span> <span class="n">reduce</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="n">x</span> <span class="o">+</span> <span class="n">y</span><span class="p">,</span> <span class="n">numbers</span><span class="p">)</span>
+
+<span class="c1"># recursion</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># functions with return type</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">add</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># function scope</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">10</span> <span class="c1"># global variable    </span>
+<span class="k">def</span><span class="w"> </span><span class="nf">func</span><span class="p">():</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="mi">20</span> <span class="c1"># local variable</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+
+<span class="n">func</span><span class="p">()</span>
+
+<span class="c1"># global keyword</span>
+<span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">func</span><span class="p">():</span>
+    <span class="k">global</span> <span class="n">x</span> <span class="c1"># refer to the global x</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">20</span>
+
+<span class="n">func</span><span class="p">()</span>
+
+<span class="c1"># nonlocal keyword</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">outer</span><span class="p">():</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="mi">10</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inner</span><span class="p">():</span>
+        <span class="k">nonlocal</span> <span class="n">x</span> <span class="c1"># refer to the x in the outer function</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="mi">20</span>
+    <span class="n">inner</span><span class="p">()</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">outer</span><span class="p">()</span>
+
+<span class="c1"># higher order functions</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">sub</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">-</span> <span class="n">b</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">apply</span><span class="p">(</span><span class="n">func</span><span class="p">,</span> <span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">)</span>
+
+<span class="n">result</span> <span class="o">=</span> <span class="n">apply</span><span class="p">(</span><span class="n">add</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+
+<span class="c1"># function inside function</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">outer</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inner</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Inner function"</span><span class="p">)</span>
+    <span class="n">inner</span><span class="p">()</span>
+
+<span class="n">outer</span><span class="p">()</span>
+
+<span class="c1"># function as return value</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">outer</span><span class="p">():</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">inner</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Inner function"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">inner</span>
+
+<span class="n">func</span> <span class="o">=</span> <span class="n">outer</span><span class="p">()</span>
+
+<span class="n">func</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Hello
+Hello Alice
+Hello Alice
+Hello Alice
+Hello Alice
+10 20
+20
+Inner function
+Inner function
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="6.-File-Handling">6. File Handling<a class="anchor-link" href="#6.-File-Handling">¶</a></h4>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">## File Handling</span>
+<span class="c1"># write to a file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"file.txt"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">)</span> <span class="c1"># write to the file/overwrite content</span>
+
+<span class="c1"># read from a file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"file.txt"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span> <span class="c1"># read the entire file</span>
+
+<span class="c1"># append to a file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"file.txt"</span><span class="p">,</span> <span class="s2">"a"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">" World"</span><span class="p">)</span> <span class="c1"># append to the file without overwriting</span>
+
+<span class="c1"># read line by line</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"file.txt"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">file</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">line</span><span class="p">)</span>
+
+<span class="c1"># write line by line</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"file.txt"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"Hello</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"World</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># read binary file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"file.txt"</span><span class="p">,</span> <span class="s2">"rb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="c1"># write binary file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"file.txt"</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">"Hello"</span><span class="p">)</span>
+
+<span class="c1"># append binary file</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"file.txt"</span><span class="p">,</span> <span class="s2">"ab"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="sa">b</span><span class="s2">" World"</span><span class="p">)</span>
+
+<span class="c1"># readline</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"file.txt"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">line</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readline</span><span class="p">()</span> <span class="c1"># read a single line</span>
+
+<span class="c1"># readlines</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"file.txt"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">lines</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">readlines</span><span class="p">()</span> <span class="c1"># read all lines</span>
+
+<span class="c1"># writelines</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"file.txt"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">writelines</span><span class="p">([</span><span class="s2">"Hello"</span><span class="p">,</span> <span class="s2">"World"</span><span class="p">])</span> <span class="c1"># write multiple lines</span>
+
+<span class="c1"># seek</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"file.txt"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">seek</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span> <span class="c1"># move the cursor to the 5th byte</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+
+<span class="c1"># tell</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"file.txt"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+    <span class="n">position</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">tell</span><span class="p">()</span> <span class="c1"># get the current position</span>
+
+<span class="c1"># flush</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"file.txt"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">)</span>
+    <span class="n">file</span><span class="o">.</span><span class="n">flush</span><span class="p">()</span> <span class="c1"># flush the buffer</span>
+
+<span class="c1"># close</span>
+<span class="n">file</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"file.txt"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span>
+<span class="n">file</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">)</span>
+<span class="n">file</span><span class="o">.</span><span class="n">close</span><span class="p">()</span> <span class="c1"># close the file</span>
+
+<span class="c1"># read csv file</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">reader</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">reader</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">row</span> <span class="ow">in</span> <span class="n">reader</span><span class="p">:</span>
+        <span class="nb">print</span><span class="p">(</span><span class="n">row</span><span class="p">)</span>
+
+<span class="c1"># write csv file</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">csv</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"file.csv"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">writer</span> <span class="o">=</span> <span class="n">csv</span><span class="o">.</span><span class="n">writer</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="s2">"Name"</span><span class="p">,</span> <span class="s2">"Age"</span><span class="p">])</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="s2">"Alice"</span><span class="p">,</span> <span class="mi">25</span><span class="p">])</span>
+    <span class="n">writer</span><span class="o">.</span><span class="n">writerow</span><span class="p">([</span><span class="s2">"Bob"</span><span class="p">,</span> <span class="mi">30</span><span class="p">])</span>
+
+<span class="c1"># read json file</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"file.json"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+
+<span class="c1"># write json file</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">json</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"file.json"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">json</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+
+<span class="c1"># read yaml file</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"file.yaml"</span><span class="p">,</span> <span class="s2">"r"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">data</span> <span class="o">=</span> <span class="n">yaml</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">Loader</span><span class="o">=</span><span class="n">yaml</span><span class="o">.</span><span class="n">FullLoader</span><span class="p">)</span>
+
+<span class="c1"># write yaml file</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">yaml</span>
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s2">"file.yaml"</span><span class="p">,</span> <span class="s2">"w"</span><span class="p">)</span> <span class="k">as</span> <span class="n">file</span><span class="p">:</span>
+    <span class="n">yaml</span><span class="o">.</span><span class="n">dump</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">file</span><span class="p">)</span>
+
+<span class="c1"># read xml file</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xml.etree.ElementTree</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ET</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">"file.xml"</span><span class="p">)</span> <span class="c1"># parse xml file</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">tree</span><span class="o">.</span><span class="n">getroot</span><span class="p">()</span> <span class="c1"># get root element</span>
+
+<span class="c1"># write xml file</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xml.etree.ElementTree</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ET</span>
+<span class="n">root</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">Element</span><span class="p">(</span><span class="s2">"root"</span><span class="p">)</span> <span class="c1"># create root element</span>
+<span class="n">tree</span> <span class="o">=</span> <span class="n">ET</span><span class="o">.</span><span class="n">ElementTree</span><span class="p">(</span><span class="n">root</span><span class="p">)</span> <span class="c1"># create tree</span>
+<span class="n">tree</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="s2">"file.xml"</span><span class="p">)</span> <span class="c1"># write to xml file</span>
+
+<span class="c1"># read excel file</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="s2">"file.xlsx"</span><span class="p">)</span>
+
+<span class="c1"># write excel file</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="n">data</span><span class="o">.</span><span class="n">to_excel</span><span class="p">(</span><span class="s2">"file.xlsx"</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="7.-OOPs---Object-Oriencted-Programming">7. OOPs - Object Oriencted Programming<a class="anchor-link" href="#7.-OOPs---Object-Oriencted-Programming">¶</a></h4>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">## Basic OOPs Concepts</span>
+<span class="c1"># class definition</span>
+<span class="c1"># what is a class ?</span>
+<span class="c1"># A class is a blueprint for creating objects (a particular data structure), providing initial values for state (member variables or attributes), and implementations of behavior (member functions or methods).</span>
+<span class="c1"># what is an object ?</span>
+<span class="c1"># An object is an instance of a class. When a class is defined, no memory is allocated but when it is instantiated (i.e. an object is created) memory is allocated.</span>
+<span class="c1"># what is a method ?</span>
+<span class="c1"># A method is a function defined inside a class that operates on the object of the class.</span>
+<span class="c1"># what is an attribute ?</span>
+<span class="c1"># An attribute is a variable that is bound to an object.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">:</span> <span class="c1"># class</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span> <span class="c1"># attribute</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> <span class="c1"># method</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Hello </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># class instantiation</span>
+<span class="n">person</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">"Alice"</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span> <span class="c1"># object</span>
+
+<span class="c1"># class attributes</span>
+<span class="n">person</span><span class="o">.</span><span class="n">name</span> <span class="c1"># 'Alice' # access the attribute</span>
+<span class="n">person</span><span class="o">.</span><span class="n">age</span> <span class="c1"># 25</span>
+
+<span class="c1"># class methods</span>
+<span class="n">person</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>
+
+<span class="c1">## Inheritance</span>
+<span class="c1"># what is inheritance?</span>
+<span class="c1"># Inheritance is a mechanism in which one class inherits the attributes and methods of another class.</span>
+<span class="c1"># super() method</span>
+<span class="c1"># what is the super() method?</span>
+<span class="c1"># The super() method is used to call the parent class constructor</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">(</span><span class="n">Person</span><span class="p">):</span> <span class="c1"># child class</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">,</span> <span class="n">roll</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">)</span> <span class="c1"># call the parent class constructor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">roll</span> <span class="o">=</span> <span class="n">roll</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">study</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is studying"</span><span class="p">)</span>
+
+<span class="n">student</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">"Bob"</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">101</span><span class="p">)</span>
+
+<span class="c1">## Encapsulation</span>
+<span class="c1"># what is encapsulation?</span>
+<span class="c1"># Encapsulation is the bundling of data (attributes) and methods that operate on the data into a single unit (class).</span>
+<span class="c1"># what are private attributes?</span>
+<span class="c1"># Private attributes are attributes that are only accessible inside the class.</span>
+<span class="c1"># what are protected attributes?</span>
+<span class="c1"># Protected attributes are attributes that are accessible inside the class and its subclasses.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Account</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">balance</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__balance</span> <span class="o">=</span> <span class="n">balance</span> <span class="c1"># private attribute</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_balance</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">__balance</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">set_balance</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">balance</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">__balance</span> <span class="o">=</span> <span class="n">balance</span>
+
+<span class="n">account</span> <span class="o">=</span> <span class="n">Account</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">account</span><span class="o">.</span><span class="n">get_balance</span><span class="p">()</span> <span class="c1"># 1000</span>
+<span class="n">account</span><span class="o">.</span><span class="n">set_balance</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>
+<span class="n">account</span><span class="o">.</span><span class="n">get_balance</span><span class="p">()</span> <span class="c1"># 2000</span>
+
+<span class="c1">## Polymorphism</span>
+<span class="c1"># what is polymorphism?</span>
+<span class="c1"># Polymorphism is the ability of an object to take on many forms. The most common use of polymorphism in OOP occurs when a parent class reference is used to refer to a child class object.</span>
+
+<span class="c1"># what is method overriding? (runtime polymorphism)</span>
+<span class="c1"># Method overriding is a feature that allows a subclass to provide a specific implementation of a method that is already provided by its parent class.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Animal</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sound</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"Animals make sound"</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Dog</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sound</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Overriding method</span>
+        <span class="k">return</span> <span class="s2">"Bark"</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Cat</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sound</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Overriding method</span>
+        <span class="k">return</span> <span class="s2">"Meow"</span>
+
+<span class="n">dog</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">()</span>
+<span class="n">cat</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">dog</span><span class="o">.</span><span class="n">sound</span><span class="p">())</span>  <span class="c1"># Output: Bark</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cat</span><span class="o">.</span><span class="n">sound</span><span class="p">())</span>  <span class="c1"># Output: Meow</span>
+
+<span class="c1"># what is method overloading? (compile-time polymorphism)</span>
+<span class="c1"># Method overloading is a feature that allows a class to have more than one method having the same name, if their argument lists are different.</span>
+<span class="c1"># we do method overloading using *args and **kwargs</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MathOperations</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_op</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">arg</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+            <span class="c1"># print(f"{i}",args[i])</span>
+            <span class="n">arg</span> <span class="o">+=</span> <span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">arg</span>
+
+<span class="n">math_op</span> <span class="o">=</span> <span class="n">MathOperations</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math_op</span><span class="o">.</span><span class="n">add_op</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>         <span class="c1"># Output: 5</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math_op</span><span class="o">.</span><span class="n">add_op</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>     <span class="c1"># Output: 15</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math_op</span><span class="o">.</span><span class="n">add_op</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span> <span class="c1"># Output: 30</span>
+
+<span class="c1"># polymorphism with functions &amp; classes</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Dog</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sound</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"Bark"</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Cat</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sound</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"Meow"</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">make_sound</span><span class="p">(</span><span class="n">animal</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">animal</span><span class="o">.</span><span class="n">sound</span><span class="p">())</span>
+
+<span class="n">dog</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">()</span>
+<span class="n">cat</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">()</span>
+
+<span class="n">make_sound</span><span class="p">(</span><span class="n">dog</span><span class="p">)</span>  <span class="c1"># Output: Bark</span>
+<span class="n">make_sound</span><span class="p">(</span><span class="n">cat</span><span class="p">)</span>  <span class="c1"># Output: Meow</span>
+
+
+<span class="c1"># polymorphism using inheritance</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Vehicle</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fuel_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"Unknown"</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">PetrolCar</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fuel_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"Petrol"</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">ElectricCar</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">fuel_type</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"Electric"</span>
+
+<span class="n">vehicles</span> <span class="o">=</span> <span class="p">[</span><span class="n">PetrolCar</span><span class="p">(),</span> <span class="n">ElectricCar</span><span class="p">()]</span>
+
+<span class="k">for</span> <span class="n">vehicle</span> <span class="ow">in</span> <span class="n">vehicles</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">vehicle</span><span class="o">.</span><span class="n">fuel_type</span><span class="p">())</span>  
+
+<span class="c1">## self and __init__</span>
+<span class="c1"># what is self?</span>
+<span class="c1"># self represents the instance of the class. By using the "self" keyword we can access the attributes and methods of the class in python.</span>
+<span class="c1"># what is __init__?</span>
+<span class="c1"># __init__ is a special method in Python classes. It is called a constructor in object-oriented terminology. This method is called when an object is created from a class and it allows the class to initialize the attributes of the class.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Car</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brand</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span> <span class="c1"># __init__ constructor</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">brand</span> <span class="o">=</span> <span class="n">brand</span> <span class="c1"># self refers to the instance of the class</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span> <span class="c1"># self.brand and self.model are attributes</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">display</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span> 
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Car: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">brand</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">car1</span> <span class="o">=</span> <span class="n">Car</span><span class="p">(</span><span class="s2">"Toyota"</span><span class="p">,</span> <span class="s2">"Corolla"</span><span class="p">)</span>
+<span class="n">car1</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Hello Alice
+Bark
+Meow
+5
+15
+30
+Bark
+Meow
+Petrol
+Electric
+Car: Toyota Corolla
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">## Intermediate OOPs Concepts</span>
+<span class="c1"># class attributes</span>
+<span class="c1"># what are class attributes?</span>
+<span class="c1"># Class attributes are attributes that are shared by all instances of a class.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Car</span><span class="p">:</span>
+    <span class="n">wheels</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1"># class attribute</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brand</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">brand</span> <span class="o">=</span> <span class="n">brand</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">display</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Car: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">brand</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Wheels: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">wheels</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">car1</span> <span class="o">=</span> <span class="n">Car</span><span class="p">(</span><span class="s2">"Toyota"</span><span class="p">,</span> <span class="s2">"Corolla"</span><span class="p">)</span>
+<span class="n">car1</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+
+<span class="c1"># instance attributes</span>
+<span class="c1"># what are instance attributes?</span>
+<span class="c1"># Instance attributes are attributes that are unique to each instance of a class.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Car</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brand</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">brand</span> <span class="o">=</span> <span class="n">brand</span> <span class="c1"># instance attribute</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span> <span class="c1"># instance attribute</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">display</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Car: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">brand</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">car1</span> <span class="o">=</span> <span class="n">Car</span><span class="p">(</span><span class="s2">"Toyota"</span><span class="p">,</span> <span class="s2">"Corolla"</span><span class="p">)</span>
+<span class="n">car1</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+
+<span class="c1"># instance vs class variables</span>
+<span class="c1"># what is the difference between instance and class variables?</span>
+<span class="c1"># Instance variables are unique to each instance of a class whereas class variables are shared by all instances of a class.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Car</span><span class="p">:</span>
+    <span class="n">wheels</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1"># class variable</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brand</span><span class="p">,</span> <span class="n">model</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">brand</span> <span class="o">=</span> <span class="n">brand</span> <span class="c1"># instance variable</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span> <span class="c1"># instance variable</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="nf">display</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Car: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">brand</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Wheels: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">wheels</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">car1</span> <span class="o">=</span> <span class="n">Car</span><span class="p">(</span><span class="s2">"Toyota"</span><span class="p">,</span> <span class="s2">"Corolla"</span><span class="p">)</span>
+<span class="n">car1</span><span class="o">.</span><span class="n">display</span><span class="p">()</span>
+
+<span class="c1"># class methods vs instance methods vs static methods</span>
+<span class="c1"># what is the difference between class methods, instance methods, and static methods?</span>
+<span class="c1"># Class methods are methods that are bound to the class and not the instance of the class. Works with class variables (cls). works with class variables only.</span>
+<span class="c1"># Instance methods are methods that are bound to the instance of the class. Works with instance variables (self). works with instance &amp; class variables. </span>
+<span class="c1"># Static methods are methods that are not bound to the instance or class. Doesn’t work with instance or class variables, used as utility functions. No variables are passed automatically.</span>
+  
+<span class="k">class</span><span class="w"> </span><span class="nc">Car</span><span class="p">:</span>
+    <span class="c1"># Class variable (common for all instances)</span>
+    <span class="n">total_cars</span> <span class="o">=</span> <span class="mi">0</span>  
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">brand</span><span class="p">,</span> <span class="n">model</span><span class="p">,</span> <span class="n">price</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">brand</span> <span class="o">=</span> <span class="n">brand</span>  <span class="c1"># Instance variable</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>  <span class="c1"># Instance variable</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">price</span> <span class="o">=</span> <span class="n">price</span>  <span class="c1"># Instance variable</span>
+        <span class="n">Car</span><span class="o">.</span><span class="n">total_cars</span> <span class="o">+=</span> <span class="mi">1</span>  <span class="c1"># Modify class variable</span>
+
+    <span class="c1"># Instance Method (works with instance attributes)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_details</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"Car: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">brand</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">model</span><span class="si">}</span><span class="s2">, Price: $</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">price</span><span class="si">}</span><span class="s2">"</span>
+
+    <span class="c1"># Class Method (works with class variables)</span>
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_total_cars</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"Total cars created: </span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="n">total_cars</span><span class="si">}</span><span class="s2">"</span>
+
+    <span class="c1"># Static Method (utility function that doesn’t depend on class or instance)</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">is_luxury</span><span class="p">(</span><span class="n">price</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">price</span> <span class="o">&gt;</span> <span class="mi">50000</span>  <span class="c1"># A car is considered luxury if price &gt; $50,000</span>
+
+
+<span class="c1"># ✅ Creating instances</span>
+<span class="n">car1</span> <span class="o">=</span> <span class="n">Car</span><span class="p">(</span><span class="s2">"BMW"</span><span class="p">,</span> <span class="s2">"X5"</span><span class="p">,</span> <span class="mi">70000</span><span class="p">)</span>
+<span class="n">car2</span> <span class="o">=</span> <span class="n">Car</span><span class="p">(</span><span class="s2">"Toyota"</span><span class="p">,</span> <span class="s2">"Camry"</span><span class="p">,</span> <span class="mi">35000</span><span class="p">)</span>
+
+<span class="c1"># ✅ Calling instance method</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">car1</span><span class="o">.</span><span class="n">get_details</span><span class="p">())</span>  <span class="c1"># Output: Car: BMW X5, Price: $70000</span>
+
+<span class="c1"># ✅ Calling class method</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Car</span><span class="o">.</span><span class="n">get_total_cars</span><span class="p">())</span>  <span class="c1"># Output: Total cars created: 2</span>
+
+<span class="c1"># ✅ Calling static method</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Car</span><span class="o">.</span><span class="n">is_luxury</span><span class="p">(</span><span class="mi">70000</span><span class="p">))</span>  <span class="c1"># Output: True</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Car</span><span class="o">.</span><span class="n">is_luxury</span><span class="p">(</span><span class="mi">35000</span><span class="p">))</span>  <span class="c1"># Output: False</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span><span class="c1">## Advanced OOPs Concepts</span>
+<span class="c1"># what is composition?</span>
+<span class="c1"># Composition is a design technique in object-oriented programming to implement has-a relationships between objects.</span>
+<span class="c1"># what is aggregation?</span>
+<span class="c1"># Aggregation is a design technique in object-oriented programming to implement has-a relationships between objects.</span>
+<span class="c1"># what is association?</span>
+<span class="c1"># Association is a relationship between two classes that establishes through their objects.</span>
+<span class="c1"># what is dependency?</span>
+<span class="c1"># Dependency is a relationship between two classes where one class depends on another class.</span>
+
+<span class="c1">## magic methods</span>
+<span class="c1"># what are magic methods?</span>
+<span class="c1"># Magic methods are special methods in Python that start and end with double underscores. They are also known as dunder methods.</span>
+<span class="c1"># what is __str__?</span>
+<span class="c1"># __str__ is a magic method that returns a string representation of an object.</span>
+<span class="c1"># what is __repr__?</span>
+<span class="c1"># __repr__ is a magic method that returns an unambiguous string representation of an object.</span>
+<span class="c1"># what is __add__?</span>
+<span class="c1"># __add__ is a magic method that defines the behavior of the + operator.</span>
+<span class="c1"># what is __sub__?</span>
+<span class="c1"># __sub__ is a magic method that defines the behavior of the - operator.</span>
+<span class="c1"># what is __mul__?</span>
+<span class="c1"># __mul__ is a magic method that defines the behavior of the * operator.</span>
+<span class="c1"># what is __truediv__?</span>
+<span class="c1"># __truediv__ is a magic method that defines the behavior of the / operator.</span>
+<span class="c1"># what is __floordiv__?</span>
+<span class="c1"># __floordiv__ is a magic method that defines the behavior of the // operator.</span>
+<span class="c1"># what is __mod__?</span>
+<span class="c1"># __mod__ is a magic method that defines the behavior of the % operator.</span>
+<span class="c1"># what is __pow__?</span>
+<span class="c1"># __pow__ is a magic method that defines the behavior of the ** operator.</span>
+<span class="c1"># what is __eq__?</span>
+<span class="c1"># __eq__ is a magic method that defines the behavior of the == operator.</span>
+<span class="c1"># what is __ne__?</span>
+<span class="c1"># __ne__ is a magic method that defines the behavior of the != operator.</span>
+<span class="c1"># what is __lt__?</span>
+<span class="c1"># __lt__ is a magic method that defines the behavior of the &lt; operator.</span>
+<span class="c1"># what is __le__?</span>
+<span class="c1"># __le__ is a magic method that defines the behavior of the &lt;= operator.</span>
+<span class="c1"># what is __gt__?</span>
+<span class="c1"># __gt__ is a magic method that defines the behavior of the &gt; operator.</span>
+<span class="c1"># what is __ge__?</span>
+<span class="c1"># __ge__ is a magic method that defines the behavior of the &gt;= operator.</span>
+<span class="c1"># what is __len__?</span>
+<span class="c1"># __len__ is a magic method that returns the length of an object.</span>
+<span class="c1"># what is __getitem__?</span>
+<span class="c1"># __getitem__ is a magic method that defines the behavior of the [] operator.</span>
+<span class="c1"># what is __setitem__?</span>
+<span class="c1"># __setitem__ is a magic method that defines the behavior of the []= operator.</span>
+<span class="c1"># what is __delitem__?</span>
+<span class="c1"># __delitem__ is a magic method that defines the behavior of the del operator.</span>
+<span class="c1"># what is __iter__?</span>
+<span class="c1"># __iter__ is a magic method that returns an iterator object.</span>
+<span class="c1"># what is __next__?</span>
+<span class="c1"># __next__ is a magic method that returns the next item in an iterator.</span>
+<span class="c1"># what is __contains__?</span>
+<span class="c1"># __contains__ is a magic method that defines the behavior of the in operator.</span>
+<span class="c1"># what is __call__?</span>
+<span class="c1"># __call__ is a magic method that enables an object to be called like a function.</span>
+<span class="c1"># what is __enter__?</span>
+<span class="c1"># __enter__ is a magic method that defines the behavior when entering a context manager.</span>
+<span class="c1"># what is __exit__?</span>
+<span class="c1"># __exit__ is a magic method that defines the behavior when exiting a context manager.</span>
+<span class="c1"># what is __getattr__?</span>
+<span class="c1"># __getattr__ is a magic method that is called when an attribute is not found in the usual places.</span>
+<span class="c1"># what is __setattr__?</span>
+<span class="c1"># __setattr__ is a magic method that is called when an attribute is set.</span>
+<span class="c1"># what is __delattr__?</span>
+<span class="c1"># __delattr__ is a magic method that is called when an attribute is deleted.</span>
+<span class="c1"># what is __dir__?</span>
+<span class="c1"># __dir__ is a magic method that returns the list of attributes of an object.</span>
+<span class="c1"># what is __doc__?</span>
+<span class="c1"># __doc__ is a magic method that returns the docstring of a class or function.</span>
+<span class="c1"># what is __class__?</span>
+<span class="c1"># __class__ is a magic method that returns the class of an object.</span>
+<span class="c1"># what is __bases__?</span>
+<span class="c1"># __bases__ is a magic method that returns the base classes of a class.</span>
+<span class="c1"># what is __subclasses__?</span>
+<span class="c1"># __subclasses__ is a magic method that returns the subclasses of a class.</span>
+<span class="c1"># what is __mro__?</span>
+<span class="c1"># __mro__ is a magic method that returns the method resolution order of a class.</span>
+<span class="c1"># what is __name__?</span>
+<span class="c1"># __name__ is a magic method that returns the name of a class or function.</span>
+<span class="c1"># what is __qualname__?</span>
+<span class="c1"># __qualname__ is a magic method that returns the qualified name of a class or function</span>
+<span class="c1"># what is __module__?</span>
+<span class="c1"># __module__ is a magic method that returns the module in which a class or function</span>
+<span class="c1"># what is __dict__?</span>
+<span class="c1"># __dict__ is a magic method that returns the dictionary containing the attributes of an object.</span>
+<span class="c1"># what is __slots__?</span>
+<span class="c1"># __slots__ is a magic method that restricts the attributes of a class to a predefined set.</span>
+<span class="c1"># what is __hash__?</span>
+<span class="c1"># __hash__ is a magic method that returns the hash value of an object.</span>
+<span class="c1"># what is __bytes__?</span>
+<span class="c1"># __bytes__ is a magic method that returns the bytes representation of an object.</span>
+<span class="c1"># what is __format__?</span>
+<span class="c1"># __format__ is a magic method that returns a formatted string representation of an object.</span>
+<span class="c1"># what is __index__?</span>
+<span class="c1"># __index__ is a magic method that returns the integer value of an object.</span>
+<span class="c1"># what is __copy__?</span>
+<span class="c1"># __copy__ is a magic method that returns a shallow copy of an object.</span>
+<span class="c1"># what is __deepcopy__?</span>
+<span class="c1"># __deepcopy__ is a magic method that returns a deep copy of an object.</span>
+<span class="c1"># what is __reduce__?</span>
+<span class="c1"># __reduce__ is a magic method that returns a tuple of the object’s state.</span>
+<span class="c1"># what is __reduce_ex__?</span>
+<span class="c1"># __reduce_ex__ is a magic method that returns a tuple of the object’s state with additional arguments.</span>
+<span class="c1"># what is __getstate__?</span>
+<span class="c1"># __getstate__ is a magic method that returns the object’s state.</span>
+<span class="c1"># what is __setstate__?</span>
+<span class="c1"># __setstate__ is a magic method that sets the object’s state.</span>
+<span class="c1"># what is __sizeof__?</span>
+<span class="c1"># __sizeof__ is a magic method that returns the size of an object in bytes.</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">copy</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MagicMethodsDemo</span><span class="p">:</span>
+    <span class="vm">__slots__</span> <span class="o">=</span> <span class="p">(</span><span class="s1">'name'</span><span class="p">,</span> <span class="s1">'age'</span><span class="p">,</span> <span class="s1">'index'</span><span class="p">,</span> <span class="s1">'new_attr'</span><span class="p">)</span>  <span class="c1"># Restricts attributes to only 'name', 'age' and 'index'</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">age</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span>
+
+    <span class="c1"># ✅ __str__ &amp; __repr__ (String Representation)</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"Person(Name: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">, Age: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="si">}</span><span class="s2">)"</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__repr__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"MagicMethodsDemo(</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">!r}</span><span class="s2">, </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="si">!r}</span><span class="s2">)"</span>
+
+    <span class="c1"># ✅ Arithmetic Operators Overloading</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">MagicMethodsDemo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__sub__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">MagicMethodsDemo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">-</span> <span class="n">other</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>
+    
+    <span class="k">def</span><span class="w"> </span><span class="fm">__mul__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">MagicMethodsDemo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">*</span> <span class="n">num</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">*</span> <span class="n">num</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__truediv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">MagicMethodsDemo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">/</span> <span class="n">num</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__floordiv__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">MagicMethodsDemo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">//</span> <span class="n">num</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__mod__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">MagicMethodsDemo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">%</span> <span class="n">num</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__pow__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">num</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">MagicMethodsDemo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">**</span> <span class="n">num</span><span class="p">)</span>
+
+    <span class="c1"># ✅ Comparison Operators Overloading</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">age</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__ne__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">!=</span> <span class="n">other</span><span class="o">.</span><span class="n">age</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__lt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">&lt;</span> <span class="n">other</span><span class="o">.</span><span class="n">age</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__le__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">&lt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">age</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">age</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__ge__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">&gt;=</span> <span class="n">other</span><span class="o">.</span><span class="n">age</span>
+
+    <span class="c1"># ✅ Length and Indexing</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__len__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">[</span><span class="n">index</span><span class="p">]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__setitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">[:</span><span class="n">index</span><span class="p">]</span> <span class="o">+</span> <span class="n">value</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__delitem__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">index</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">[:</span><span class="n">index</span><span class="p">]</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">[</span><span class="n">index</span> <span class="o">+</span> <span class="mi">1</span><span class="p">:]</span>
+
+    <span class="c1"># ✅ Iterators</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__iter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__next__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">):</span>
+            <span class="n">char</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">index</span> <span class="o">+=</span> <span class="mi">1</span>
+            <span class="k">return</span> <span class="n">char</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">StopIteration</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__contains__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">item</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">item</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span>
+
+    <span class="c1"># ✅ Callable Object</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Calling </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> with age </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="c1"># ✅ Context Manager</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__enter__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Entering context with </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">exc_type</span><span class="p">,</span> <span class="n">exc_value</span><span class="p">,</span> <span class="n">traceback</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Exiting context with </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="c1"># ✅ Attribute Handling</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__getattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"Attribute </span><span class="si">{</span><span class="n">attr</span><span class="si">}</span><span class="s2"> not found!"</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="n">attr</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__delattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">attr</span><span class="p">):</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__delattr__</span><span class="p">(</span><span class="n">attr</span><span class="p">)</span>
+
+    <span class="c1"># ✅ Meta Information</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">get_class_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="s2">"class"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="p">,</span>
+            <span class="s2">"bases"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__bases__</span><span class="p">,</span>
+            <span class="s2">"mro"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__mro__</span><span class="p">,</span>
+            <span class="s2">"module"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__module__</span><span class="p">,</span>
+            <span class="s2">"dict"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__dict__</span><span class="p">,</span>
+            <span class="s2">"name"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span>
+            <span class="s2">"qualname"</span><span class="p">:</span> <span class="bp">self</span><span class="o">.</span><span class="vm">__class__</span><span class="o">.</span><span class="vm">__qualname__</span>
+        <span class="p">}</span>
+
+    <span class="c1"># ✅ Hashing, Bytes, and Formatting</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__hash__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">hash</span><span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__bytes__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">bytes</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="s1">'utf-8'</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__format__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">format_spec</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"Formatted: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="si">}</span><span class="s2"> years old)"</span>
+
+    <span class="c1"># ✅ Index Representation</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__index__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span>
+
+    <span class="c1"># ✅ Copying &amp; Serialization</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">__copy__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">MagicMethodsDemo</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__deepcopy__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">memodict</span><span class="o">=</span><span class="p">{}):</span>
+        <span class="k">return</span> <span class="n">MagicMethodsDemo</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">memodict</span><span class="p">),</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">age</span><span class="p">,</span> <span class="n">memodict</span><span class="p">))</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">__sizeof__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="n">__sizeof__</span><span class="p">()</span>
+
+<span class="c1"># ✅ Testing the Class</span>
+
+<span class="n">p1</span> <span class="o">=</span> <span class="n">MagicMethodsDemo</span><span class="p">(</span><span class="s2">"Alice"</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">MagicMethodsDemo</span><span class="p">(</span><span class="s2">"Bob"</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+
+<span class="c1"># String representation</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">p1</span><span class="p">))</span>  <span class="c1"># __str__</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">repr</span><span class="p">(</span><span class="n">p1</span><span class="p">))</span>  <span class="c1"># __repr__</span>
+
+<span class="c1"># Arithmetic operations</span>
+<span class="nb">print</span><span class="p">((</span><span class="n">p1</span> <span class="o">+</span> <span class="n">p2</span><span class="p">)</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>  <span class="c1"># __add__</span>
+<span class="nb">print</span><span class="p">((</span><span class="n">p2</span> <span class="o">-</span> <span class="n">p1</span><span class="p">)</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>  <span class="c1"># __sub__</span>
+
+<span class="c1"># Comparison</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p1</span> <span class="o">&lt;</span> <span class="n">p2</span><span class="p">)</span>  <span class="c1"># __lt__</span>
+
+<span class="c1"># Length and Indexing</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">p1</span><span class="p">))</span>  <span class="c1"># __len__</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p1</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>  <span class="c1"># __getitem__</span>
+
+<span class="c1"># Iteration</span>
+<span class="k">for</span> <span class="n">char</span> <span class="ow">in</span> <span class="n">p1</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">char</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s2">" "</span><span class="p">)</span>  <span class="c1"># __iter__, __next__</span>
+<span class="nb">print</span><span class="p">()</span>
+
+<span class="c1"># Contains</span>
+<span class="nb">print</span><span class="p">(</span><span class="s1">'A'</span> <span class="ow">in</span> <span class="n">p1</span><span class="p">)</span>  <span class="c1"># __contains__</span>
+
+<span class="c1"># Call object</span>
+<span class="n">p1</span><span class="p">()</span>  <span class="c1"># __call__</span>
+
+<span class="c1"># Context Manager</span>
+<span class="k">with</span> <span class="n">p1</span> <span class="k">as</span> <span class="n">obj</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">obj</span><span class="p">)</span>
+
+<span class="c1"># Attribute Handling</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">unknown</span><span class="p">)</span>  <span class="c1"># __getattr__</span>
+<span class="n">p1</span><span class="o">.</span><span class="n">new_attr</span> <span class="o">=</span> <span class="s2">"Test"</span>  <span class="c1"># __setattr__</span>
+<span class="k">del</span> <span class="n">p1</span><span class="o">.</span><span class="n">new_attr</span>  <span class="c1"># __delattr__</span>
+
+<span class="c1"># Meta Information</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">get_class_info</span><span class="p">())</span>  <span class="c1"># __class__, __bases__, __mro__, __module__, __dict__, __name__, __qualname__</span>
+
+<span class="c1"># Hashing, Bytes, and Formatting</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">hash</span><span class="p">(</span><span class="n">p1</span><span class="p">))</span>  <span class="c1"># __hash__</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">bytes</span><span class="p">(</span><span class="n">p1</span><span class="p">))</span>  <span class="c1"># __bytes__</span>
+<span class="nb">print</span><span class="p">(</span><span class="nb">format</span><span class="p">(</span><span class="n">p1</span><span class="p">))</span>  <span class="c1"># __format__</span>
+
+<span class="c1"># Copying &amp; Serialization</span>
+<span class="n">p3</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>  <span class="c1"># __copy__</span>
+<span class="n">p4</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">p1</span><span class="p">)</span>  <span class="c1"># __deepcopy__</span>
+
+<span class="c1"># Size of object</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p1</span><span class="o">.</span><span class="n">__sizeof__</span><span class="p">())</span>  <span class="c1"># __sizeof__</span>
+
+<span class="c1"># Note:</span>
+<span class="c1"># 1️⃣ String Representations → __str__, __repr__</span>
+<span class="c1"># 2️⃣ Operator Overloading → __add__, __sub__, __mul__, __truediv__, __floordiv__, __mod__, __pow__</span>
+<span class="c1"># 3️⃣ Comparison Operators → __eq__, __ne__, __lt__, __le__, __gt__, __ge__</span>
+<span class="c1"># 4️⃣ Length &amp; Indexing → __len__, __getitem__, __setitem__, __delitem__</span>
+<span class="c1"># 5️⃣ Iteration → __iter__, __next__</span>
+<span class="c1"># 6️⃣ Membership Testing → __contains__</span>
+<span class="c1"># 7️⃣ Callable Objects → __call__</span>
+<span class="c1"># 8️⃣ Context Manager → __enter__, __exit__</span>
+<span class="c1"># 9️⃣ Attribute Management → __getattr__, __setattr__, __delattr__</span>
+<span class="c1"># 🔟 Meta Information → __class__, __bases__, __mro__, __module__, __dict__, __name__, __qualname__</span>
+<span class="c1"># 🔢 Hashing &amp; Formatting → __hash__, __bytes__, __format__</span>
+<span class="c1"># 🔢 Copying &amp; Serialization → __copy__, __deepcopy__, __sizeof__</span>
+
+<span class="c1">## overloading</span>
+<span class="c1"># what is operator overloading?</span>
+<span class="c1"># Operator overloading is a feature in Python that allows the same operator to have different meanings depending on the operands.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Point</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">x</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">y</span>
+
+    <span class="c1"># Overloading `+` operator</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">Point</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">y</span><span class="p">)</span>
+
+<span class="n">p1</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">Point</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">p3</span> <span class="o">=</span> <span class="n">p1</span> <span class="o">+</span> <span class="n">p2</span>  <span class="c1"># Uses __add__</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"New Point: (</span><span class="si">{</span><span class="n">p3</span><span class="o">.</span><span class="n">x</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">p3</span><span class="o">.</span><span class="n">y</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>  <span class="c1"># Output: New Point: (6, 8)</span>
+
+<span class="c1"># what is method overloading?</span>
+<span class="c1"># Method overloading is a feature that allows a class to have more than one method having the same name, if their argument lists are different.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MathOperations</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add_op</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">arg</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
+            <span class="c1"># print(f"{i}",args[i])</span>
+            <span class="n">arg</span> <span class="o">+=</span> <span class="n">args</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="k">return</span> <span class="n">arg</span>
+
+<span class="n">math</span> <span class="o">=</span> <span class="n">MathOperations</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">add_op</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>         <span class="c1"># Output: 5</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">add_op</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>     <span class="c1"># Output: 15</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math</span><span class="o">.</span><span class="n">add_op</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">15</span><span class="p">))</span> <span class="c1"># Output: 30</span>
+
+<span class="c1"># what is method overriding?</span>
+<span class="c1"># Method overriding is a feature that allows a subclass to provide a specific implementation of a method that is already provided by its parent class.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Parent</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"This is Parent Class"</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Parent</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Overriding Parent's method</span>
+        <span class="k">return</span> <span class="s2">"This is Child Class"</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Child</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">show</span><span class="p">())</span>  <span class="c1"># Output: This is Child Class</span>
+
+<span class="c1"># what is function overloading?</span>
+<span class="c1"># Function overloading is a feature that allows a function to have more than one definition.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">singledispatch</span> 
+
+<span class="nd">@singledispatch</span> <span class="c1"># function overloading using singledispatch decorator</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">show</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"Default: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="nd">@show</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"Integer: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="nd">@show</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"String: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>     <span class="c1"># Output: Integer: 10</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">show</span><span class="p">(</span><span class="s2">"Hi"</span><span class="p">))</span>   <span class="c1"># Output: String: Hi</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">show</span><span class="p">(</span><span class="mf">3.14</span><span class="p">))</span>   <span class="c1"># Output: Default: 3.14</span>
+
+<span class="c1"># what is function overriding?</span>
+<span class="c1"># Function overriding is a feature that allows a function to have more than one definition.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Animal</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sound</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"Some sound"</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Dog</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">sound</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Function overriding in subclass</span>
+        <span class="k">return</span> <span class="s2">"Bark"</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">sound</span><span class="p">())</span>  <span class="c1"># Output: Bark</span>
+
+
+<span class="c1"># what is constructor overloading?</span>
+<span class="c1"># Constructor overloading is a feature that allows a class to have more than one constructor.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">:</span> <span class="c1"># try to use *args for same</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span> <span class="k">if</span> <span class="n">name</span> <span class="k">else</span> <span class="s2">"Unknown"</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span> <span class="k">if</span> <span class="n">age</span> <span class="k">else</span> <span class="mi">18</span>
+
+<span class="n">s1</span> <span class="o">=</span> <span class="n">Student</span><span class="p">()</span>
+<span class="n">s2</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">"Sahil"</span><span class="p">)</span>
+<span class="n">s3</span> <span class="o">=</span> <span class="n">Student</span><span class="p">(</span><span class="s2">"Kaushik"</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">s1</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">s1</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>  <span class="c1"># Output: Unknown 18</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s2</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">s2</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>  <span class="c1"># Output: Sahil 18</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">s3</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">s3</span><span class="o">.</span><span class="n">age</span><span class="p">)</span>  <span class="c1"># Output: Kaushik 30</span>
+
+<span class="c1"># what is constructor overriding?</span>
+<span class="c1"># Constructor overriding is a feature that allows a subclass to provide a specific implementation of a constructor that is already provided by its parent class.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Parent</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Parent Constructor"</span><span class="p">)</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Parent</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Overriding Constructor</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Child Constructor"</span><span class="p">)</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Child</span><span class="p">()</span>  <span class="c1"># Output: Child Constructor (Parent's constructor is overridden)</span>
+
+<span class="c1"># what is operator overriding?</span>
+<span class="c1"># Operator overriding is a feature in Python that allows the same operator to have different meanings depending on the operands.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Rectangle</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">length</span><span class="p">,</span> <span class="n">width</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">=</span> <span class="n">length</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># Overriding `&gt;` operator</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">length</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">width</span><span class="p">)</span> <span class="o">&gt;</span> <span class="p">(</span><span class="n">other</span><span class="o">.</span><span class="n">length</span> <span class="o">*</span> <span class="n">other</span><span class="o">.</span><span class="n">width</span><span class="p">)</span>
+
+<span class="n">r1</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">)</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="n">Rectangle</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">25</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r1</span> <span class="o">&gt;</span> <span class="n">r2</span><span class="p">)</span>  <span class="c1"># Output: True (200 &gt; 125)</span>
+
+<span class="c1"># what is method signature?</span>
+<span class="c1"># Method signature is a combination of a method’s name and the number and types of its parameters.</span>
+<span class="c1"># what is function signature?</span>
+<span class="c1"># Function signature is a combination of a function’s name and the number and types of its parameters.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>  <span class="c1"># Function Signature</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">MathOperations</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">multiply</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>  <span class="c1"># Method Signature</span>
+        <span class="k">return</span> <span class="n">x</span> <span class="o">*</span> <span class="n">y</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">MathOperations</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>       <span class="c1"># Output: 15</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">m</span><span class="o">.</span><span class="n">multiply</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span> <span class="c1"># Output: 6</span>
+
+<span class="c1"># what is constructor signature?</span>
+<span class="c1"># Constructor signature is a combination of a constructor’s name and the number and types of its parameters.</span>
+<span class="c1"># what is operator signature?</span>
+<span class="c1"># Operator signature is a combination of an operator’s name and the number and types of its operands.</span>
+<span class="c1"># what is method resolution order?</span>
+<span class="c1"># Method resolution order is the order in which methods are resolved/inherited in a class hierarchy.</span>
+<span class="c1"># C3 Linearization (Depth-First, Left-to-Right) algorithm is used to calculate the method resolution order in Python.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">A</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"A"</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">B</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"B"</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">C</span><span class="p">(</span><span class="n">A</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"C"</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">D</span><span class="p">(</span><span class="n">B</span><span class="p">,</span> <span class="n">C</span><span class="p">):</span>  <span class="c1"># Multiple Inheritance</span>
+    <span class="k">pass</span>
+
+<span class="n">d</span> <span class="o">=</span> <span class="n">D</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">show</span><span class="p">())</span>  <span class="c1"># Output: B  (Because Python follows MRO: D → B → C → A)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">D</span><span class="o">.</span><span class="n">mro</span><span class="p">())</span>   <span class="c1"># Output: [D, B, C, A, object]</span>
+
+<span class="c1"># what is operator precedence?</span>
+<span class="c1"># Operator precedence is the order in which operators are evaluated in an expression.</span>
+<span class="c1"># what is operator associativity?</span>
+<span class="c1"># Operator associativity is the order in which operators of the same/equal precedence are evaluated in an expression.</span>
+<span class="n">result</span> <span class="o">=</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">4</span>  <span class="c1"># Multiplication (*) has higher precedence than addition (+)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: 14</span>
+
+<span class="c1"># Associativity Example (Left-to-Right)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">-</span> <span class="mi">5</span> <span class="o">-</span> <span class="mi">2</span>  <span class="c1"># (10 - 5) - 2 = 3 (Left-to-right associativity)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="p">)</span>  <span class="c1"># Output: 3</span>
+
+<span class="c1"># Precedence Order (Highest to Lowest):</span>
+<span class="c1"># 1️⃣ () Parentheses</span>
+<span class="c1"># 2️⃣ ** Exponentiation</span>
+<span class="c1"># 3️⃣ * / // % Multiplication/Division</span>
+<span class="c1"># 4️⃣ + - Addition/Subtraction</span>
+<span class="c1"># 5️⃣ == != &lt; &gt; Comparison Operators</span>
+<span class="c1"># 6️⃣ and, or, not Logical Operators</span>
+
+<span class="c1"># Associativity Rules:</span>
+
+<span class="c1"># Left-to-Right: +, -, *, /, //, %, &amp;, |, ^, &lt;&lt;, &gt;&gt;</span>
+<span class="c1"># Right-to-Left: **, =, +=, -=, *=, /=, //=, %=, **= </span>
+
+<span class="c1"># what is operator arity?</span>
+<span class="c1"># Operator arity is the number of operands an operator takes.</span>
+<span class="n">x</span> <span class="o">=</span> <span class="o">-</span><span class="mi">5</span>    <span class="c1"># Unary Operator (-)</span>
+<span class="n">y</span> <span class="o">=</span> <span class="mi">10</span> <span class="o">+</span> <span class="mi">5</span>  <span class="c1"># Binary Operator (+)</span>
+<span class="n">z</span> <span class="o">=</span> <span class="mi">100</span> <span class="k">if</span> <span class="n">y</span> <span class="o">&gt;</span> <span class="mi">10</span> <span class="k">else</span> <span class="mi">50</span>  <span class="c1"># Ternary Operator</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">z</span><span class="p">)</span>  <span class="c1"># Output: -5 15 100</span>
+
+<span class="c1">## Parsing Techniques</span>
+<span class="c1"># what is operator precedence parsing?</span>
+<span class="c1"># Operator precedence parsing is a method of parsing expressions based on the precedence of operators.</span>
+<span class="c1"># what is operator associativity parsing?</span>
+<span class="c1"># Operator associativity parsing is a method of parsing expressions based on the associativity of operators.</span>
+<span class="c1"># what is operator arity parsing?</span>
+<span class="c1"># Operator arity parsing is a method of parsing expressions based on the arity of operators.</span>
+<span class="c1"># what is operator overloading parsing?</span>
+<span class="c1"># Operator overloading parsing is a method of parsing expressions based on the overloading of operators.</span>
+<span class="c1"># what is operator overriding parsing?</span>
+<span class="c1"># Operator overriding parsing is a method of parsing expressions based on the overriding of operators.</span>
+<span class="c1"># what is function overloading parsing?</span>
+<span class="c1"># Function overloading parsing is a method of parsing expressions based on the overloading of functions.</span>
+<span class="c1"># what is function overriding parsing?</span>
+<span class="c1"># Function overriding parsing is a method of parsing expressions based on the overriding of functions.</span>
+<span class="c1"># what is constructor overloading parsing?</span>
+<span class="c1"># Constructor overloading parsing is a method of parsing expressions based on the overloading of constructors.</span>
+<span class="c1"># what is constructor overriding parsing?</span>
+<span class="c1"># Constructor overriding parsing is a method of parsing expressions based on the overriding of constructors.</span>
+<span class="c1"># what is operator signature parsing?</span>
+<span class="c1"># Operator signature parsing is a method of parsing expressions based on the signature of operators.</span>
+<span class="c1"># what is method signature parsing?</span>
+<span class="c1"># Method signature parsing is a method of parsing expressions based on the signature of methods.</span>
+<span class="c1"># what is function signature parsing?</span>
+<span class="c1"># Function signature parsing is a method of parsing expressions based on the signature of functions.</span>
+<span class="c1"># what is constructor signature parsing?</span>
+<span class="c1"># Constructor signature parsing is a method of parsing expressions based on the signature of constructors.</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">singledispatch</span>
+
+<span class="c1"># ✅ Operator Overloading Parsing (Custom `+` operator)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Math</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__add__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># Operator Overloading</span>
+        <span class="k">return</span> <span class="n">Math</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">+</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__gt__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>  <span class="c1"># Operator Overriding</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">&gt;</span> <span class="n">other</span><span class="o">.</span><span class="n">value</span>
+
+<span class="c1"># ✅ Operator Arity Parsing (Unary, Binary, Ternary)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">arity_example</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="o">-</span><span class="n">x</span>  <span class="c1"># Unary Operator</span>
+    <span class="n">z</span> <span class="o">=</span> <span class="n">x</span> <span class="o">+</span> <span class="mi">5</span>  <span class="c1"># Binary Operator</span>
+    <span class="k">return</span> <span class="n">z</span> <span class="k">if</span> <span class="n">z</span> <span class="o">&gt;</span> <span class="mi">10</span> <span class="k">else</span> <span class="mi">0</span>  <span class="c1"># Ternary Operator</span>
+
+<span class="c1"># ✅ Operator Precedence &amp; Associativity Parsing</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">precedence_example</span><span class="p">():</span>
+    <span class="k">return</span> <span class="mi">2</span> <span class="o">+</span> <span class="mi">3</span> <span class="o">*</span> <span class="mi">4</span>  <span class="c1"># Multiplication has higher precedence than addition</span>
+
+<span class="c1"># ✅ Function Overloading Parsing (Using `@singledispatch`)</span>
+<span class="nd">@singledispatch</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">show</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"Default: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="nd">@show</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"Integer: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="nd">@show</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"String: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="c1"># ✅ Function Overriding Parsing (Subclass Redefinition)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Parent</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"Parent Class"</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Child</span><span class="p">(</span><span class="n">Parent</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Function Overriding</span>
+        <span class="k">return</span> <span class="s2">"Child Class"</span>
+
+<span class="c1"># ✅ Constructor Overloading Parsing (Handling Different Arguments)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Student</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">age</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span> <span class="k">if</span> <span class="n">name</span> <span class="k">else</span> <span class="s2">"Unknown"</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">age</span> <span class="o">=</span> <span class="n">age</span> <span class="k">if</span> <span class="n">age</span> <span class="k">else</span> <span class="mi">18</span>
+
+<span class="c1"># ✅ Constructor Overriding Parsing (Child Class Changes Parent Constructor)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Base</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Base Constructor"</span><span class="p">)</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Derived</span><span class="p">(</span><span class="n">Base</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Overriding Parent Constructor</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Derived Constructor"</span><span class="p">)</span>
+
+<span class="c1"># ✅ Method Signature Parsing (Matching Method by Signature)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Example</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">display</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>  <span class="c1"># Method Signature</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="c1"># ✅ Function Signature Parsing (Matching Function by Signature)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">function_signature</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span> <span class="n">b</span><span class="p">:</span> <span class="nb">float</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">float</span><span class="p">:</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+
+<span class="c1"># ✅ Constructor Signature Parsing (Matching Constructor by Signature)</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Vehicle</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">model</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">year</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">model</span> <span class="o">=</span> <span class="n">model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="n">year</span>
+
+<span class="c1"># Testing the Examples</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">precedence_example</span><span class="p">())</span>  <span class="c1"># Operator Precedence</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">arity_example</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>  <span class="c1"># Operator Arity</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">show</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>  <span class="c1"># Function Overloading</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">show</span><span class="p">(</span><span class="s2">"Python"</span><span class="p">))</span>  <span class="c1"># Function Overloading</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Child</span><span class="p">()</span><span class="o">.</span><span class="n">show</span><span class="p">())</span>  <span class="c1"># Function Overriding</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Student</span><span class="p">(</span><span class="s2">"Alice"</span><span class="p">,</span> <span class="mi">22</span><span class="p">)</span><span class="o">.</span><span class="n">name</span><span class="p">)</span>  <span class="c1"># Constructor Overloading</span>
+<span class="n">Derived</span><span class="p">()</span>  <span class="c1"># Constructor Overriding</span>
+<span class="n">math1</span> <span class="o">=</span> <span class="n">Math</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">math2</span> <span class="o">=</span> <span class="n">Math</span><span class="p">(</span><span class="mi">20</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">((</span><span class="n">math1</span> <span class="o">+</span> <span class="n">math2</span><span class="p">)</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>  <span class="c1"># Operator Overloading</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">math1</span> <span class="o">&gt;</span> <span class="n">math2</span><span class="p">)</span>  <span class="c1"># Operator Overriding</span>
+
+<span class="c1"># Note:</span>
+<span class="c1"># 1️⃣ Operator Parsing → Overloading, Overriding, Precedence, Associativity, and Arity.</span>
+<span class="c1"># 2️⃣ Function Parsing → Overloading (using @singledispatch) &amp; Overriding (via subclassing).</span>
+<span class="c1"># 3️⃣ Constructor Parsing → Overloading (handling multiple signatures) &amp; Overriding.</span>
+<span class="c1"># 4️⃣ Method &amp; Function Signature Parsing → Ensuring methods &amp; functions match parameter types.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell-outputWrapper">
+<div class="jp-Collapser jp-OutputCollapser jp-Cell-outputCollapser">
+</div>
+<div class="jp-OutputArea jp-Cell-outputArea">
+<div class="jp-OutputArea-child">
+<div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
+<div class="jp-RenderedText jp-OutputArea-output" data-mime-type="text/plain" tabindex="0">
+<pre>Person(Name: Alice, Age: 25)
+MagicMethodsDemo('Alice', 25)
+55
+5
+True
+25
+l
+A l i c e 
+True
+Calling Alice with age 25
+Entering context with Alice
+Person(Name: Alice, Age: 25)
+Exiting context with Alice
+Attribute unknown not found!
+{'class': &lt;class '__main__.MagicMethodsDemo'&gt;, 'bases': (&lt;class 'object'&gt;,), 'mro': (&lt;class '__main__.MagicMethodsDemo'&gt;, &lt;class 'object'&gt;), 'module': '__main__', 'dict': mappingproxy({'__module__': '__main__', '__slots__': ('name', 'age', 'index', 'new_attr'), '__init__': &lt;function MagicMethodsDemo.__init__ at 0x000001F2FE2D05E0&gt;, '__str__': &lt;function MagicMethodsDemo.__str__ at 0x000001F2FE2D0E00&gt;, '__repr__': &lt;function MagicMethodsDemo.__repr__ at 0x000001F2FE2D0EA0&gt;, '__add__': &lt;function MagicMethodsDemo.__add__ at 0x000001F2FE2D2F20&gt;, '__sub__': &lt;function MagicMethodsDemo.__sub__ at 0x000001F2FE2D2FC0&gt;, '__mul__': &lt;function MagicMethodsDemo.__mul__ at 0x000001F2FE2D2A20&gt;, '__truediv__': &lt;function MagicMethodsDemo.__truediv__ at 0x000001F2FE2D2AC0&gt;, '__floordiv__': &lt;function MagicMethodsDemo.__floordiv__ at 0x000001F2FE2D3240&gt;, '__mod__': &lt;function MagicMethodsDemo.__mod__ at 0x000001F2FE2D32E0&gt;, '__pow__': &lt;function MagicMethodsDemo.__pow__ at 0x000001F2FE2D1E40&gt;, '__eq__': &lt;function MagicMethodsDemo.__eq__ at 0x000001F2FE2D1EE0&gt;, '__ne__': &lt;function MagicMethodsDemo.__ne__ at 0x000001F2FE2D2020&gt;, '__lt__': &lt;function MagicMethodsDemo.__lt__ at 0x000001F2FE2D20C0&gt;, '__le__': &lt;function MagicMethodsDemo.__le__ at 0x000001F2FE2D0CC0&gt;, '__gt__': &lt;function MagicMethodsDemo.__gt__ at 0x000001F2FE2D0C20&gt;, '__ge__': &lt;function MagicMethodsDemo.__ge__ at 0x000001F2FE2D0F40&gt;, '__len__': &lt;function MagicMethodsDemo.__len__ at 0x000001F2FE2D0D60&gt;, '__getitem__': &lt;function MagicMethodsDemo.__getitem__ at 0x000001F2FE2D0FE0&gt;, '__setitem__': &lt;function MagicMethodsDemo.__setitem__ at 0x000001F2FE2D1080&gt;, '__delitem__': &lt;function MagicMethodsDemo.__delitem__ at 0x000001F2FE2D1120&gt;, '__iter__': &lt;function MagicMethodsDemo.__iter__ at 0x000001F2FE2D11C0&gt;, '__next__': &lt;function MagicMethodsDemo.__next__ at 0x000001F2FE2D1260&gt;, '__contains__': &lt;function MagicMethodsDemo.__contains__ at 0x000001F2FE2D1300&gt;, '__call__': &lt;function MagicMethodsDemo.__call__ at 0x000001F2FE2D13A0&gt;, '__enter__': &lt;function MagicMethodsDemo.__enter__ at 0x000001F2FE2D1440&gt;, '__exit__': &lt;function MagicMethodsDemo.__exit__ at 0x000001F2FE2D14E0&gt;, '__getattr__': &lt;function MagicMethodsDemo.__getattr__ at 0x000001F2FE2D1580&gt;, '__setattr__': &lt;function MagicMethodsDemo.__setattr__ at 0x000001F2FE2D1620&gt;, '__delattr__': &lt;function MagicMethodsDemo.__delattr__ at 0x000001F2FE2D16C0&gt;, 'get_class_info': &lt;function MagicMethodsDemo.get_class_info at 0x000001F2FE2D1760&gt;, '__hash__': &lt;function MagicMethodsDemo.__hash__ at 0x000001F2FE2D1800&gt;, '__bytes__': &lt;function MagicMethodsDemo.__bytes__ at 0x000001F2FE2D18A0&gt;, '__format__': &lt;function MagicMethodsDemo.__format__ at 0x000001F2FE0D0040&gt;, '__index__': &lt;function MagicMethodsDemo.__index__ at 0x000001F2FE0D02C0&gt;, '__copy__': &lt;function MagicMethodsDemo.__copy__ at 0x000001F2FE0D0360&gt;, '__deepcopy__': &lt;function MagicMethodsDemo.__deepcopy__ at 0x000001F2FE0D0900&gt;, '__sizeof__': &lt;function MagicMethodsDemo.__sizeof__ at 0x000001F2FE0D09A0&gt;, 'age': &lt;member 'age' of 'MagicMethodsDemo' objects&gt;, 'index': &lt;member 'index' of 'MagicMethodsDemo' objects&gt;, 'name': &lt;member 'name' of 'MagicMethodsDemo' objects&gt;, 'new_attr': &lt;member 'new_attr' of 'MagicMethodsDemo' objects&gt;, '__doc__': None}), 'name': 'MagicMethodsDemo', 'qualname': 'MagicMethodsDemo'}
+1783039627156642475
+b'Alice'
+Formatted: Alice (25 years old)
+48
+New Point: (6, 8)
+5
+15
+30
+This is Child Class
+Integer: 10
+String: Hi
+Default: 3.14
+Bark
+Unknown 18
+Sahil 18
+Kaushik 30
+Child Constructor
+True
+15
+6
+B
+[&lt;class '__main__.D'&gt;, &lt;class '__main__.B'&gt;, &lt;class '__main__.C'&gt;, &lt;class '__main__.A'&gt;, &lt;class 'object'&gt;]
+14
+3
+-5 15 100
+14
+15
+Integer: 10
+String: Python
+Child Class
+Alice
+Derived Constructor
+30
+False
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="jp-Cell jp-MarkdownCell jp-Notebook-cell">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
+</div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput" data-mime-type="text/markdown">
+<h4 id="8.-Iterators,-Generators-&amp;-Decorators">8. Iterators, Generators &amp; Decorators<a class="anchor-link" href="#8.-Iterators,-Generators-&amp;-Decorators">¶</a></h4>
+</div>
+</div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs">
+<div class="jp-Cell-inputWrapper" tabindex="0">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In [ ]:</div>
+<div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="cm-editor cm-s-jupyter">
+<div class="highlight hl-ipython3"><pre><span></span> 
+</pre></div>
+</div>
 </div>
 </div>
 </div>
