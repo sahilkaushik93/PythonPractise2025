@@ -7533,7 +7533,7 @@ a.anchor-link {
 <li>Python Debugging, Testing &amp; Best Practices</li>
 <li>Regular Expressions</li>
 <li>Database Handling (Sqlite3 &amp; SQLAlchemy)</li>
-<li>Web Scraping, Automation &amp; API Handling</li>
+<li>Web Scraping, Automation &amp; API Handling(flask, django, fastapi)</li>
 <li>Meta-Programming (Metaclasses &amp; Reflection)</li>
 <li>Design Patterns in Python</li>
 <li>Network Programming</li>
@@ -10545,10 +10545,500 @@ Calling add with (3, 5), {}
 <div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
 <div class="cm-editor cm-s-jupyter">
 <div class="highlight hl-ipython3"><pre><span></span><span class="c1">## Decorators</span>
+<span class="c1"># A decorator in Python is a function that modifies the behavior of another function or method without changing its code. Decorators are used to extend functionality in a clean and reusable way.</span>
+
+<span class="c1"># 🔹 How Decorators Work?</span>
+<span class="c1"># 1️⃣ A decorator is a function that takes another function as input.</span>
+<span class="c1"># 2️⃣ It wraps the original function with additional behavior.</span>
+<span class="c1"># 3️⃣ It returns a new function with enhanced capabilities.</span>
+
+<span class="c1"># Basic Decorator Example</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">my_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Before the function call"</span><span class="p">)</span>
+        <span class="n">func</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"After the function call"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span>  <span class="c1"># Returns the modified function</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">say_hello</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Hello, World!"</span><span class="p">)</span>
+
+<span class="n">say_hello</span> <span class="o">=</span> <span class="n">my_decorator</span><span class="p">(</span><span class="n">say_hello</span><span class="p">)</span>  <span class="c1"># Manually applying the decorator</span>
+<span class="n">say_hello</span><span class="p">()</span> <span class="c1"># without decorator</span>
+
+<span class="nd">@my_decorator</span>  <span class="c1"># Applying the decorator</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">say_hello</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Hello, World!"</span><span class="p">)</span>
+
+<span class="n">say_hello</span><span class="p">()</span> <span class="c1"># with decorator</span>
+
+<span class="c1">## Decorators with Arguments</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">my_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>  <span class="c1"># Accepts any number of arguments</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Calling </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> with arguments: </span><span class="si">{</span><span class="n">args</span><span class="si">}</span><span class="s2">, </span><span class="si">{</span><span class="n">kwargs</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># Calls the original function</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nd">@my_decorator</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">add</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+
+<span class="c1">## Practical use case of decorators</span>
+<span class="c1"># 1. Logging func calls</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Calling </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> with </span><span class="si">{</span><span class="n">args</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> returned </span><span class="si">{</span><span class="n">result</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nd">@log_decorator</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">multiply</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">a</span> <span class="o">*</span> <span class="n">b</span>
+
+<span class="n">multiply</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+
+<span class="c1"># 2. Timing Execution</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">time</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">timer_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="n">start_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="n">end_time</span> <span class="o">=</span> <span class="n">time</span><span class="o">.</span><span class="n">time</span><span class="p">()</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> took </span><span class="si">{</span><span class="n">end_time</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="n">start_time</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2"> seconds"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">result</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nd">@timer_decorator</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">slow_function</span><span class="p">():</span>
+    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Function Finished"</span><span class="p">)</span>
+
+<span class="n">slow_function</span><span class="p">()</span>
+
+<span class="c1"># 3. Enforcing Access Control</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">require_admin</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">user</span> <span class="o">!=</span> <span class="s2">"admin"</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">"Access Denied!"</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nd">@require_admin</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">delete_database</span><span class="p">(</span><span class="n">user</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Database deleted by </span><span class="si">{</span><span class="n">user</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">delete_database</span><span class="p">(</span><span class="s2">"guest"</span><span class="p">)</span>  <span class="c1"># Access Denied!</span>
+<span class="n">delete_database</span><span class="p">(</span><span class="s2">"admin"</span><span class="p">)</span>  <span class="c1"># Database deleted</span>
+
+<span class="c1"># 4. Caching with lru_cache</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
+
+<span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># Caches results</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">factorial</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Calculating factorial(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+    <span class="k">return</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">n</span> <span class="o">*</span> <span class="n">factorial</span><span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>  <span class="c1"># Computed</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">factorial</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span>  <span class="c1"># Cached</span>
+
+<span class="c1"># 5. Preserving Metadata</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">my_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>  <span class="c1"># Preserves metadata</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="c1">## Types of Decorators in Python</span>
+<span class="c1"># Python has different types of decorators based on their functionality and use cases. They are mainly classified into:</span>
+<span class="c1"># 1️⃣ Function Decorators (Regular Decorators e.g. logging decorator)</span>
+<span class="c1"># 2️⃣ Class Decorators</span>
+<span class="c1"># 3️⃣ Method Decorators (Instance, Class, and Static Method Decorators)</span>
+<span class="c1"># 4️⃣ Built-in Decorators</span>
+
+<span class="c1"># 2. Class Decorator: Class decorators are used to modify class behavior instead of a function.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">CountInstances</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="bp">cls</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cls</span> <span class="o">=</span> <span class="bp">cls</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Creating instance </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">count</span><span class="si">}</span><span class="s2"> of </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">cls</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">cls</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+<span class="nd">@CountInstances</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
+
+<span class="n">p1</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">"Alice"</span><span class="p">)</span>
+<span class="n">p2</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">"Bob"</span><span class="p">)</span>
+
+<span class="c1"># 3. Method Decorators (Instance, Class &amp; Static Methods)</span>
+<span class="c1"># Python provides three built-in method decorators:</span>
+<span class="c1"># 1️⃣ @staticmethod → For defining static methods</span>
+<span class="c1"># 2️⃣ @classmethod → For defining class methods</span>
+<span class="c1"># 3️⃣ @property → For defining getter methods</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Example</span><span class="p">:</span>
+    <span class="n">class_var</span> <span class="o">=</span> <span class="s2">"Class Variable"</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">value</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">=</span> <span class="n">value</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">static_method</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"This is a static method, does not access instance or class variables"</span><span class="p">)</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">class_method</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"This is a class method, it can access: </span><span class="si">{</span><span class="bp">cls</span><span class="o">.</span><span class="n">class_var</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">value_squared</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="o">**</span> <span class="mi">2</span>
+
+<span class="c1"># Using methods</span>
+<span class="n">ex</span> <span class="o">=</span> <span class="n">Example</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">static_method</span><span class="p">()</span>  <span class="c1"># Works without instance</span>
+<span class="n">ex</span><span class="o">.</span><span class="n">class_method</span><span class="p">()</span>   <span class="c1"># Can access class variables</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">ex</span><span class="o">.</span><span class="n">value_squared</span><span class="p">)</span>  <span class="c1"># Calls the property</span>
+
+<span class="c1"># 4. Built-in Decorators in Python</span>
+<span class="c1"># Python provides some predefined decorators for convenience:</span>
+
+<span class="c1"># Decorator	Purpose</span>
+<span class="c1"># @staticmethod: Defines a static method (no self or cls).</span>
+<span class="c1"># @classmethod: Defines a class method (access cls).</span>
+<span class="c1"># @property: Converts a method into a read-only attribute.</span>
+<span class="c1"># @functools.lru_cache: Caches function results for faster execution.</span>
+<span class="c1"># @functools.wraps: Preserves function metadata when using custom decorators.</span>
+<span class="c1"># @dataclass: Automatically generates __init__, __repr__, etc.</span>
+<span class="c1"># @singledispatch (for function overloading)</span>
+
+<span class="c1"># 1️⃣ @staticmethod</span>
+<span class="c1"># A static method does not receive the instance (self) or class (cls) as its first argument. It behaves just like a regular function but belongs to a class.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">MathOperations</span><span class="p">:</span>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">add</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">b</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">a</span> <span class="o">+</span> <span class="n">b</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">MathOperations</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>  <span class="c1"># Output: 8</span>
+<span class="c1"># When to use?</span>
+<span class="c1"># When a method doesn’t depend on the class or instance but is logically related to the class.</span>
+
+<span class="c1"># 2️⃣ @classmethod</span>
+<span class="c1"># A class method receives the class (cls) as its first parameter, allowing access to class-level attributes and methods.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Employee</span><span class="p">:</span>
+    <span class="n">company</span> <span class="o">=</span> <span class="s2">"TechCorp"</span>
+
+    <span class="nd">@classmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">change_company</span><span class="p">(</span><span class="bp">cls</span><span class="p">,</span> <span class="n">new_name</span><span class="p">):</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">company</span> <span class="o">=</span> <span class="n">new_name</span>
+
+<span class="n">Employee</span><span class="o">.</span><span class="n">change_company</span><span class="p">(</span><span class="s2">"InnovateTech"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">Employee</span><span class="o">.</span><span class="n">company</span><span class="p">)</span>  <span class="c1"># Output: InnovateTech</span>
+<span class="c1"># When to use?</span>
+<span class="c1"># When you need to modify class variables.</span>
+<span class="c1"># When creating alternative constructors.</span>
+
+<span class="c1"># 3️⃣ @property</span>
+<span class="c1"># The @property decorator allows a method to be accessed like an attribute.</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Circle</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_radius</span> <span class="o">=</span> <span class="n">radius</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># No need to call it like a method</span>
+        <span class="k">return</span> <span class="mf">3.14</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_radius</span> <span class="o">**</span> <span class="mi">2</span>
+
+<span class="n">c</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">c</span><span class="o">.</span><span class="n">area</span><span class="p">)</span>  <span class="c1"># Output: 78.5 (No parentheses)</span>
+<span class="c1"># When to use?</span>
+<span class="c1"># To define read-only properties.</span>
+<span class="c1"># To encapsulate class attributes with getter/setter logic.</span>
+
+<span class="c1"># 4️⃣ @functools.lru_cache (Least Recently Used Cache)</span>
+<span class="c1"># This decorator caches function results to speed up execution.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">lru_cache</span>
+
+<span class="nd">@lru_cache</span><span class="p">(</span><span class="n">maxsize</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>  <span class="c1"># Cache up to 3 results</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">n</span>
+    <span class="k">return</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">fib</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>  <span class="c1"># Output: 55 (Faster due to caching)</span>
+<span class="c1"># When to use?</span>
+<span class="c1"># When optimizing expensive recursive functions.</span>
+<span class="c1"># When caching frequently used values.</span>
+
+<span class="c1"># 5️⃣ @functools.wraps (Preserves Metadata)</span>
+<span class="c1"># When creating custom decorators, @wraps ensures the wrapped function retains its original name and docstring.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">wraps</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">my_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="nd">@wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>  <span class="c1"># Preserves metadata</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Before function call"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nd">@my_decorator</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""This function greets the user."""</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">"Hello!"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">greet</span><span class="o">.</span><span class="vm">__name__</span><span class="p">)</span>  <span class="c1"># Output: greet (without @wraps, it would return 'wrapper')</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">greet</span><span class="o">.</span><span class="vm">__doc__</span><span class="p">)</span>   <span class="c1"># Output: This function greets the user.</span>
+<span class="c1"># When to use?</span>
+<span class="c1"># When writing custom decorators to avoid losing function metadata.</span>
+
+<span class="c1"># 6️⃣ @dataclass</span>
+<span class="c1"># The @dataclass decorator automatically generates boilerplate code (e.g., __init__, __repr__, __eq__) for simple classes.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dataclasses</span><span class="w"> </span><span class="kn">import</span> <span class="n">dataclass</span>
+
+<span class="nd">@dataclass</span>
+<span class="k">class</span><span class="w"> </span><span class="nc">Person</span><span class="p">:</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
+    <span class="n">age</span><span class="p">:</span> <span class="nb">int</span>
+
+<span class="n">p</span> <span class="o">=</span> <span class="n">Person</span><span class="p">(</span><span class="s2">"Alice"</span><span class="p">,</span> <span class="mi">30</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>  <span class="c1"># Output: Person(name='Alice', age=30)</span>
+<span class="c1"># When to use?</span>
+<span class="c1"># When creating data models without manually defining __init__, __repr__, etc.</span>
+
+<span class="c1"># 7️⃣ @functools.singledispatch (Function Overloading)</span>
+<span class="c1"># This decorator enables function overloading based on argument types.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">functools</span><span class="w"> </span><span class="kn">import</span> <span class="n">singledispatch</span>
+
+<span class="nd">@singledispatch</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">process</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">"Unsupported data type"</span><span class="p">)</span>
+
+<span class="nd">@process</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"Processing integer: </span><span class="si">{</span><span class="n">data</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="nd">@process</span><span class="o">.</span><span class="n">register</span><span class="p">(</span><span class="nb">str</span><span class="p">)</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">_</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+    <span class="k">return</span> <span class="sa">f</span><span class="s2">"Processing string: </span><span class="si">{</span><span class="n">data</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">process</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span>   <span class="c1"># Output: Processing integer: 10</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">process</span><span class="p">(</span><span class="s2">"abc"</span><span class="p">))</span>  <span class="c1"># Output: Processing string: ABC</span>
+<span class="c1"># When to use?</span>
+<span class="c1"># When implementing function overloading in Python.</span>
 
 <span class="c1">## Abstraction &amp; Decorator Relationship</span>
+<span class="c1"># What is Abstraction in Python?</span>
+<span class="c1"># Abstraction is an OOP (Object-Oriented Programming) principle that hides implementation details and only exposes the necessary parts of a class.</span>
+<span class="c1"># Key Idea: The user only needs to know what a function/class does, not how it does it.</span>
+<span class="c1"># Implemented Using:</span>
+<span class="c1"># 1. Abstract Classes (ABC module in Python)</span>
+<span class="c1"># 2. Abstract Methods (Methods that must be implemented in child classes)</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Animal</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>  <span class="c1"># Abstract class</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_sound</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>  <span class="c1"># Must be implemented by subclasses</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Dog</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_sound</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"Bark!"</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Cat</span><span class="p">(</span><span class="n">Animal</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">make_sound</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="s2">"Meow!"</span>
+
+<span class="c1"># animal = Animal()  # ❌ Error: Can't instantiate abstract class</span>
+<span class="n">dog</span> <span class="o">=</span> <span class="n">Dog</span><span class="p">()</span>
+<span class="n">cat</span> <span class="o">=</span> <span class="n">Cat</span><span class="p">()</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">dog</span><span class="o">.</span><span class="n">make_sound</span><span class="p">())</span>  <span class="c1"># ✅ Output: Bark!</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">cat</span><span class="o">.</span><span class="n">make_sound</span><span class="p">())</span>  <span class="c1"># ✅ Output: Meow!</span>
+<span class="c1"># ✅ Here, Animal is an abstract class, and make_sound() must be implemented in every subclass.</span>
+
+<span class="c1">## Relationship Between Abstraction &amp; Decorators</span>
+<span class="c1"># Python decorators can be used to enforce abstraction in multiple ways:</span>
+<span class="c1"># 1️⃣ Using Decorators to Enforce Abstract Methods (@abstractmethod)</span>
+<span class="c1"># Python provides @abstractmethod, a built-in decorator that ensures a method is implemented in subclasses.</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Shape</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="nd">@abstractmethod</span>  <span class="c1"># Decorator ensures implementation in subclasses</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Circle</span><span class="p">(</span><span class="n">Shape</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">=</span> <span class="n">radius</span>
+
+    <span class="k">def</span><span class="w"> </span><span class="nf">area</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="mf">3.14</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">radius</span>
+
+<span class="c1"># shape = Shape()  # ❌ Error: Abstract class can't be instantiated</span>
+<span class="n">circle</span> <span class="o">=</span> <span class="n">Circle</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># ✅ Works</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">circle</span><span class="o">.</span><span class="n">area</span><span class="p">())</span>  <span class="c1"># Output: 78.5</span>
+
+<span class="c1"># 2️⃣ Using Decorators to Implement Access Control (Simulating Private Methods)</span>
+<span class="c1"># Python does not have truly private methods, but decorators can enforce restricted access &amp; can prevent direct access to private methods..</span>
+<span class="c1"># Example: Protecting a Method Using a Decorator</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">private_method_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">raise</span> <span class="ne">RuntimeError</span><span class="p">(</span><span class="s2">"This method is private and cannot be accessed directly."</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">BankAccount</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">balance</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">=</span> <span class="n">balance</span>
+
+    <span class="nd">@private_method_decorator</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_calculate_interest</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>  <span class="c1"># Simulating a private method</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">balance</span> <span class="o">*</span> <span class="mf">0.05</span>
+
+<span class="n">account</span> <span class="o">=</span> <span class="n">BankAccount</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="c1"># account._calculate_interest()  # ❌ Raises an error</span>
+<span class="c1"># ✅ Here, we used a decorator to restrict access to _calculate_interest() instead of making it conventionally private.</span>
+
+<span class="c1"># 3️⃣ Using Decorators to Control Method Behavior Dynamically</span>
+<span class="c1"># Instead of using abstract methods, decorators can modify methods dynamically.</span>
+<span class="c1"># Example: Adding Logging to Abstract Methods</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">log_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Calling </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">abc</span><span class="w"> </span><span class="kn">import</span> <span class="n">ABC</span><span class="p">,</span> <span class="n">abstractmethod</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Vehicle</span><span class="p">(</span><span class="n">ABC</span><span class="p">):</span>
+    <span class="nd">@abstractmethod</span>
+    <span class="nd">@log_decorator</span>  <span class="c1"># Decorator on abstract method</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Car</span><span class="p">(</span><span class="n">Vehicle</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">move</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Car is moving!"</span><span class="p">)</span>
+
+<span class="n">car</span> <span class="o">=</span> <span class="n">Car</span><span class="p">()</span>
+<span class="n">car</span><span class="o">.</span><span class="n">move</span><span class="p">()</span>
+<span class="c1"># ✅ Here, the decorator @log_decorator applies logging functionality while enforcing abstraction.</span>
 
 <span class="c1">## Chaining of decorators</span>
+<span class="c1"># Chaining decorators means applying multiple decorators to a single function. Each decorator wraps the function and modifies its behavior in a layered manner.</span>
+
+<span class="c1"># ✅ How Does It Work?</span>
+<span class="c1"># When multiple decorators are applied to a function, they are executed from bottom to top (closest decorator first).</span>
+
+<span class="c1"># Execution Order: Decorators are applied bottom-up but executed top-down.</span>
+<span class="c1"># Function Arguments: Decorators must handle arguments properly when chaining.</span>
+<span class="c1"># Class Methods	Chained: decorators can be applied to class methods.</span>
+<span class="c1"># Built-in Decorators: Built-in decorators (@staticmethod, @classmethod) can be used in chaining.</span>
+
+<span class="c1"># 1️⃣ Basic Example of Chaining Decorators</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">uppercase_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">()</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">exclamation_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">():</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">()</span> <span class="o">+</span> <span class="s2">"!!!"</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nd">@exclamation_decorator</span>
+<span class="nd">@uppercase_decorator</span>  <span class="c1"># This runs first</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">():</span>
+    <span class="k">return</span> <span class="s2">"hello"</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">greet</span><span class="p">())</span>  <span class="c1"># Output: HELLO!!!</span>
+
+<span class="c1"># 📝 Execution Order:</span>
+<span class="c1"># @uppercase_decorator runs first → Converts "hello" to "HELLO".</span>
+<span class="c1"># @exclamation_decorator runs next → Appends "!!!", resulting in "HELLO!!!".</span>
+<span class="c1"># ✅ The decorators are applied bottom-up, but execute top-down.</span>
+
+<span class="c1"># 2️⃣ Chaining Decorators with Arguments</span>
+<span class="c1"># Decorators can also handle function arguments while chaining.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">double_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">num</span> <span class="o">*</span> <span class="mi">2</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">square_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">num</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nd">@square_decorator</span>
+<span class="nd">@double_decorator</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">add_five</span><span class="p">(</span><span class="n">num</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">num</span> <span class="o">+</span> <span class="mi">5</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">add_five</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>  <span class="c1"># Output: 64</span>
+<span class="c1"># 📝 Execution Flow:</span>
+<span class="c1"># double_decorator(3) → (3 * 2) = 6</span>
+<span class="c1"># square_decorator(6 + 5) → (11 ** 2) = 121</span>
+<span class="c1"># Final Output = 121</span>
+<span class="c1"># ✅ Decorators modify input before passing it to the next layer!</span>
+
+<span class="c1"># 3️⃣ Chaining Decorators on Class Methods</span>
+<span class="c1"># Decorators can be applied to class methods, including @staticmethod and @classmethod.</span>
+<span class="k">def</span><span class="w"> </span><span class="nf">bold_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"&lt;b&gt;</span><span class="si">{</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/b&gt;"</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">italic_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="k">return</span> <span class="sa">f</span><span class="s2">"&lt;i&gt;</span><span class="si">{</span><span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span><span class="w"> </span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span><span class="si">}</span><span class="s2">&lt;/i&gt;"</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Formatter</span><span class="p">:</span>
+    <span class="nd">@bold_decorator</span>
+    <span class="nd">@italic_decorator</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">message</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">message</span>
+
+<span class="n">f</span> <span class="o">=</span> <span class="n">Formatter</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="s2">"Hello"</span><span class="p">))</span>  <span class="c1"># Output: &lt;b&gt;&lt;i&gt;Hello&lt;/i&gt;&lt;/b&gt;</span>
+
+<span class="c1"># ✅ Class methods can have chained decorators just like functions!</span>
+
+<span class="c1"># 4️⃣ Chaining Built-in Decorators</span>
+<span class="c1"># Python supports built-in method decorators, and we can chain them with custom ones.</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">functools</span>
+
+<span class="k">def</span><span class="w"> </span><span class="nf">log_decorator</span><span class="p">(</span><span class="n">func</span><span class="p">):</span>
+    <span class="nd">@functools</span><span class="o">.</span><span class="n">wraps</span><span class="p">(</span><span class="n">func</span><span class="p">)</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Calling function: </span><span class="si">{</span><span class="n">func</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="k">class</span><span class="w"> </span><span class="nc">Example</span><span class="p">:</span>
+    <span class="nd">@staticmethod</span>
+    <span class="nd">@log_decorator</span>  <span class="c1"># This runs first</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">greet</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">"Hello from static method!"</span><span class="p">)</span>
+
+<span class="n">Example</span><span class="o">.</span><span class="n">greet</span><span class="p">()</span>
+
+<span class="c1"># 📝 Execution Order:</span>
+
+<span class="c1"># @log_decorator prints "Calling function: greet".</span>
+<span class="c1"># @staticmethod ensures greet() can be called without an instance.</span>
+<span class="c1"># ✅ Python's built-in decorators can also be part of the decorator chain.</span>
 </pre></div>
 </div>
 </div>
